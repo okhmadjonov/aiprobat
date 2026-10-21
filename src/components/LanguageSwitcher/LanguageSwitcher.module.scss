@@ -1,0 +1,65 @@
+@use "@/styles/breakpoints" as *;
+
+.langBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: #113f77;
+  border: none;
+  border-radius: 12px;
+  padding: 0 18px;
+  min-width: 68px;
+  height: 48px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  font-family: inherit;
+  box-shadow: none;
+  outline: none;
+
+  // Hover va tranzition effektlarini butunlay o'chiramiz
+  transition: none !important;
+  transform: none !important;
+
+  &:hover {
+    background-color: #ffffff !important;
+    color: #113f77 !important;
+    transform: none !important;
+    filter: none !important;
+    box-shadow: none !important;
+  }
+
+  &:active {
+    transform: none !important;
+    background-color: #ffffff !important;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  // Oq panellar ichida (Inspektorlar sahifasi kabi)
+  &.variantDark {
+    background-color: #113f77;
+    color: #ffffff;
+
+    &:hover {
+      background-color: #113f77 !important;
+      color: #ffffff !important;
+    }
+
+    &:active {
+      background-color: #113f77 !important;
+    }
+  }
+
+  @include respond-to(xs) {
+    min-width: 42px;
+    height: 36px;
+    padding: 4px 10px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+}

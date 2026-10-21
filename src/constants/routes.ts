@@ -1,0 +1,15 @@
+export const routes = {
+  HOME: "/",
+  DASHBOARD: "/dashboard",
+  MENU: "/menu",
+  LOGIN: "/login",
+  FORBIDDEN: "/forbidden",
+  PROFILE: "/profile",
+  JAZO_TURLARI: "/jazo-turlari",
+  JAZO_DETAIL: "/jazo-turlari/batafsil",
+  MODDIY_YORDAM: "/moddiy-yordam",
+  INSPEKTORLAR: "/inspektorlar",
+  INSPEKTORLAR_DETAIL: "/inspektorlar/batafsil",
+  AI_YORDAMCHI: "/ai-yordamchi",
+  HUJJATLAR: "/hujjatlar",
+} as const;

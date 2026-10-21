@@ -1,0 +1,159 @@
+{
+  "common": {
+    "back": "Orqaga",
+    "home": "Bosh sahifa",
+    "search": "Qidirish...",
+    "select": "Tanlang",
+    "city": "Toshkent shahri",
+    "all": "Barchasi",
+    "close": "Yopish",
+    "voiceRead": "Ovozli o'qish",
+    "readMore": "Batafsil"
+  },
+  "menu": {
+    "title": "PROBATSIYA",
+    "subtitle": "INFO KIOSK",
+    "welcome": "Asosiy menyuga xush kelibsiz",
+    "jazo": "JAZO TURLARI HAQIDA",
+    "moddiy": "BIR MARTALIK MODDIY YORDAM HAQIDA",
+    "inspektorlar": "PROBATSIYA INSPEKTORLARI HAQIDA",
+    "ai": "AI YORDAMCHI",
+    "hujjatlar": "ME'YORIY-HUQUQIY HUJJATLAR"
+  },
+  "moddiyYordam": {
+    "title": "BIR MARTALIK MODDIY YORDAM HAQIDA",
+    "what": "Moddiy yordam nima ?",
+    "flow": "Ajratish ketma-ketligi (sxema)",
+    "docs": "Kerakli hujjatlar ro'yxati",
+    "sample": "Ariza namunasi",
+    "faq": "Ko'p beriladigan savollar"
+  },
+  "inspektorlar": {
+    "title": "Probatsiya inspektorlari haqida",
+    "inspektorlar": "Inspektorlar",
+    "vositalar": "Nazorat vositalari",
+    "statistika": "Statistika",
+    "hisobotlar": "Hisobotlar",
+    "sozlamalar": "Sozlamalar",
+    "tashkentCity": "Toshkent shahri",
+    "chooseDistrict": "Tumanni tanlang",
+    "inspectorCount": "ta inspektor",
+    "viewDetail": "Batafsil",
+    "districts": {
+      "olmazor": "Olmazor tumani",
+      "yunusobod": "Yunusobod tumani",
+      "chilonzor": "Chilonzor tumani",
+      "mirzo_ulugbek": "Mirzo Ulug'bek tumani",
+      "shayxontohur": "Shayxontohur tumani",
+      "uchtepa": "Uchtepa tumani",
+      "yashnobod": "Yashnobod tumani",
+      "mirobod": "Mirobod tumani",
+      "yakkasaroy": "Yakkasaroy tumani",
+      "sergeli": "Sergeli tumani",
+      "yangihayot": "Yangihayot tumani",
+      "bektemir": "Bektemir tumani"
+    }
+  },
+  "inspektorDetail": {
+    "title": "INSPEKTORLAR",
+    "fio": "F.I.SH",
+    "birthYear": "TUG'ILGAN YILI",
+    "orgName": "TASHKILOT NOMI",
+    "phone": "TELEFON RAQAMI",
+    "region": "VILOYAT",
+    "district": "TUMAN",
+    "date": "SANA",
+    "status": "HOLATI",
+    "active": "FAOL",
+    "fioVal": "Usmonov Elbek O'roqaliyevich",
+    "orgVal": "Surxondaryo viloyati IIB Sho'rchi tumani IIB",
+    "regionVal": "Surxondaryo viloyati",
+    "districtVal": "Sho'rchi tumani"
+  },
+  "hujjatlar": {
+    "title": "ME'YORIY-HUQUQIY HUJJATLAR",
+    "qonunlar": "Qonunlar",
+    "farmonlar": "Prezident farmonlari",
+    "qarorlar": "Vazirlar Mahkamasi qarorlari",
+    "iiv": "IIV buyruqlari",
+    "nizomlar": "Nizomlar va yo'riqnomalar",
+    "boshqa": "Boshqa hujjatlar",
+    "audio": "Audio shaklda eshitish",
+    "ebook": "Elektron kitob shaklda o'qish",
+    "laws": "O'zbekiston Respublikasi Qonunlari",
+    "decrees": "Prezident Farmonlari va Qarorlari",
+    "cabinet": "Vazirlar Mahkamasi Qarorlari",
+    "departmental": "Idoraviy normativ-huquqiy hujjatlar",
+    "docCount": "ta hujjat"
+  },
+  "aiYordamchi": {
+    "title": "AI YORDAMCHI",
+    "prompt": "Probatsiyaga oid savollaringizni yozing yoki ovozli so'rashingiz mumkin.",
+    "sampleTitle": "MISOL SAVOLLAR",
+    "q1": "Probatsiya nima?",
+    "q2": "Axloq tuzatish ishlari qanday jazo ?",
+    "q3": "Moddiy yordam qanday olinadi ?",
+    "q4": "Inspektorlar bilan qanday bog'lanish mumkin ?",
+    "placeholder": "Savolingizni bu yerga yozing...",
+    "send": "Yuborish",
+    "listening": "Tinglanmoqda...",
+    "welcome": "Assalomu alaykum! Men probatsiya xizmati bo'yicha sun'iy intellekt yordamchisiman."
+  },
+  "jazoTurlari": {
+    "title": "JAZO TURLARI HAQIDA",
+    "ati": "AXLOQ TUZATISH ISHLARI",
+    "och": "OZODLIKNI CHEKLASH",
+    "mji": "MAJBURIY JAMOAT ISHLARI",
+    "mxmq": "MUAYYAN HUQUQDAN MAHRUM QILISH",
+    "shs": "SHARTLI HUKM QILISH",
+    "udo": "UZOQ MUDDATLI OZOD QILISH"
+  },
+  "jazoDetail": {
+    "turnPage": "Varaqlash",
+    "duration": "Muddat",
+    "location": "O'tash joyi",
+    "supervisor": "Nazorat qiluvchi",
+    "ati": {
+      "title": "ATI — AXLOQ TUZATISH ISHLARI",
+      "desc": "Axloq tuzatish ishlari — bu jazo turi bo'lib, u jinoyat sodir etgan shaxslarni jamiyatda axloqiy me'yorlarga rioya qilishga o'rgatish, ularning ijtimoiy moslashuvini ta'minlash maqsadida qo'llaniladi.",
+      "duration": "6 oydan 3 yilgacha",
+      "location": "maxsus muassasalar yoki jamoat joylari",
+      "supervisor": "probatsiya organlari tomonidan"
+    },
+    "och": {
+      "title": "OCH — OZODLIKNI CHEKLASH",
+      "desc": "Ozodlikni cheklash — sud tomonidan mahkumga nisbatan muayyan cheklovlar belgilashdan iborat bo'lib, mahkum yashash joyini tark etmasligi va belgilangan taqiqlarga amal qilishi shart.",
+      "duration": "1 oydan 5 yilgacha",
+      "location": "doimiy yashash joyida (elektron bilaguzuk orqali)",
+      "supervisor": "probatsiya bo'linmalari va profilaktika nozirlari"
+    },
+    "mji": {
+      "title": "MJI — MAJBURIY JAMOAT ISHLARI",
+      "desc": "Majburiy jamoat ishlari — mahkumni haq to'lanmaydigan foydali jamoat ishlarini bajarishga majburiy jalb qilishdan iborat jazo turidir.",
+      "duration": "120 soatdan 480 soatgacha",
+      "location": "mahalliy hokimiyat organlari belgilagan ob'ektlarda",
+      "supervisor": "probatsiya xizmati xodimlari"
+    },
+    "mxmq": {
+      "title": "MXMQ — MUAYYAN HUQUQDAN MAHRUM QILISH",
+      "desc": "Muayyan huquqdan mahrum qilish — korxona, muassasa yoki tashkilotlarda ma'lum lavozimlarni egallash yoki ma'lum faoliyat bilan shug'ullanish huquqidan mahrum qilishdir.",
+      "duration": "1 yildan 5 yilgacha",
+      "location": "mahkumning ish yoki xizmat faoliyatida",
+      "supervisor": "probatsiya organlari va ish beruvchi ma'muriyati"
+    },
+    "shs": {
+      "title": "SHS — SHARTLI HUKM QILISH",
+      "desc": "Shartli hukm — sud tomonidan tayinlangan jazoni haqiqatda o'tamasdan, muayyan sinov muddati davomida o'z xulq-atvori bilan tuzalishini isbotlash imkoniyatini berishdir.",
+      "duration": "1 yildan 3 yilgacha sinov muddati",
+      "location": "yashash, ish yoki o'qish joyi bo'yicha nazorat ostida",
+      "supervisor": "probatsiya xizmati nazorati ostida"
+    },
+    "udo": {
+      "title": "UDO — UZOQ MUDDATLI OZOD QILISH",
+      "desc": "Jazodan muddatidan ilgari shartli ozod qilish — mahkum tayinlangan jazoning qonunda belgilangan qismini o'tab bo'lganidan so'ng, qolgan qismidan ozod qilinishidir.",
+      "duration": "o'talmagan jazo muddati davomida",
+      "location": "yashash joyi bo'yicha profilaktik hisobda",
+      "supervisor": "probatsiya va ichki ishlar bo'linmalari"
+    }
+  }
+}

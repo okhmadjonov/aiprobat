@@ -1,0 +1,334 @@
+@use "@/styles/breakpoints" as *;
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #0b2149;
+  user-select: none;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  @include respond-to(xs) {
+    overflow-y: auto;
+  }
+}
+
+.header {
+  height: 72px;
+  background-color: #0b2149;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  flex-shrink: 0;
+
+  @include respond-to(xs) {
+    padding: 0 16px;
+    height: 60px;
+  }
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.backBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border: none;
+  color: #0b2149;
+  height: 48px;
+  min-width: 145px;
+  margin-left: -32px;
+  padding: 0 48px 0 24px;
+  border-radius: 0 9999px 9999px 0;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  overflow: visible;
+
+  span {
+    letter-spacing: 0.2px;
+  }
+
+  &:hover {
+    background: #f8fafc;
+    transform: translateX(-2px);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  @include respond-to(xs) {
+    margin-left: -16px;
+    height: 40px;
+    min-width: 120px;
+    padding: 0 38px 0 16px;
+    font-size: 13px;
+  }
+}
+
+.backArrowCircle {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 4px solid #0b2149;
+  color: #0b2149;
+  box-sizing: border-box;
+  flex-shrink: 0;
+
+  @include respond-to(xs) {
+    width: 28px;
+    height: 28px;
+    border-width: 3px;
+  }
+}
+
+.headerTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  margin: 0;
+  text-transform: uppercase;
+
+  @include respond-to(xs) {
+    font-size: 15px;
+  }
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.clockText {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+  margin-right: 4px;
+
+  @include respond-to(xs) {
+    display: none;
+  }
+}
+
+.homeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: transparent;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.langBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  background: #ffffff;
+  border: none;
+  border-radius: 6px;
+  color: #0b2149;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #f1f5f9;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+// Asosiy karta
+.mainWrapper {
+  flex: 1;
+  padding: 10px 28px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+
+  @include respond-to(xs) {
+    padding: 10px 14px 16px;
+  }
+}
+
+.whiteCard {
+  width: 100%;
+  max-width: 1320px;
+  height: 100%;
+  background: #f6f8fb;
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(3, 14, 38, 0.35);
+  padding: 32px 42px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  box-sizing: border-box;
+
+  @include respond-to(md) {
+    gap: 28px;
+    padding: 24px;
+  }
+
+  @include respond-to(xs) {
+    flex-direction: column;
+    padding: 20px 16px;
+    gap: 20px;
+    height: auto;
+  }
+}
+
+// Chapdagi inspektor portreti (Kapsula shakli)
+.portraitContainer {
+  flex-shrink: 0;
+  width: 210px;
+  height: 330px;
+  border-radius: 110px;
+  overflow: hidden;
+  border: 3px solid #cbd5e1;
+  background: #e2e8f0;
+  box-shadow: 0 10px 24px rgba(11, 33, 73, 0.12);
+
+  @include respond-to(xs) {
+    width: 150px;
+    height: 230px;
+    border-radius: 80px;
+  }
+}
+
+.portraitImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+// O'ngdagi ma'lumotlar qismi
+.infoContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionTitle {
+  font-size: 21px;
+  font-weight: 800;
+  color: #0b2149;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+
+.recordsList {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+// To'q ko'k kapsula qatori
+.blueRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #113c72;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 7px 20px;
+  min-height: 38px;
+  box-sizing: border-box;
+
+  .label {
+    font-size: 14px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+
+  .value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: right;
+  }
+
+  @include respond-to(xs) {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+// Oq oraliq qator
+.whiteRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  color: #0b2149;
+  padding: 5px 20px;
+  min-height: 34px;
+  box-sizing: border-box;
+
+  .label {
+    font-size: 14px;
+    font-weight: 800;
+    color: #0b2149;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+
+  .value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0b2149;
+    text-align: right;
+  }
+
+  @include respond-to(xs) {
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,215 @@
+@use "@/styles/breakpoints" as *;
+
+.header {
+  height: clamp(60px, 8.5vh, 76px);
+  background-color: #0b2149;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(18px, 2.5vw, 36px);
+  flex-shrink: 0;
+  box-sizing: border-box;
+
+  @include respond-to(xs) {
+    padding: 0 14px;
+    height: 56px;
+  }
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.5vw, 20px);
+}
+
+.backBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border: none;
+  color: #0b2149;
+  height: 48px;
+  min-width: 145px;
+  margin-left: -clamp(18px, 2.5vw, 36px);
+  padding: 0 48px 0 24px;
+  border-radius: 0 9999px 9999px 0;
+  font-size: clamp(15px, 1.25vw, 18px);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  overflow: visible;
+
+  span {
+    letter-spacing: 0.2px;
+  }
+
+  &:hover {
+    background: #f8fafc;
+    transform: translateX(-2px);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  @include respond-to(xs) {
+    margin-left: -14px;
+    height: 40px;
+    min-width: 120px;
+    padding: 0 38px 0 16px;
+    font-size: 13px;
+  }
+}
+
+.backArrowCircle {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 4px solid #0b2149;
+  color: #0b2149;
+  box-sizing: border-box;
+  flex-shrink: 0;
+
+  @include respond-to(xs) {
+    width: 28px;
+    height: 28px;
+    border-width: 3px;
+  }
+}
+
+.titleArea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerTitle {
+  font-size: clamp(16px, 1.45vw, 22px);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  margin: 0;
+  text-transform: uppercase;
+
+  @include respond-to(xs) {
+    font-size: 13px;
+  }
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.4vw, 18px);
+}
+
+.clockText {
+  font-size: clamp(13px, 1.15vw, 16px);
+  font-weight: 600;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+  margin-right: 4px;
+
+  @include respond-to(xs) {
+    display: none;
+  }
+}
+
+.homeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(34px, 2.8vw, 42px);
+  height: clamp(34px, 2.8vw, 42px);
+  background: transparent;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @include respond-to(xs) {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.langSelector {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 24px;
+  padding: 3px;
+  gap: 3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  user-select: none;
+
+  @include respond-to(xs) {
+    padding: 2px;
+    gap: 2px;
+  }
+}
+
+.langItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: clamp(4px, 0.6vh, 6px) clamp(8px, 0.9vw, 12px);
+  border-radius: 20px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: clamp(12px, 1.05vw, 14px);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+
+  &:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  &.activeLang {
+    background: #ffffff;
+    color: #0b2149;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-weight: 800;
+  }
+
+  @include respond-to(xs) {
+    padding: 3px 6px;
+    gap: 4px;
+    font-size: 11px;
+  }
+}
+
+.flagIcon {
+  width: clamp(16px, 1.3vw, 20px);
+  height: clamp(11px, 0.9vw, 14px);
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  display: block;
+}
+

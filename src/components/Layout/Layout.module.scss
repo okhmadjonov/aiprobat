@@ -1,0 +1,71 @@
+@use "@/styles/breakpoints" as *;
+
+.layoutContainer {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  max-height: 100vh;
+  background-color: #0b2149;
+  user-select: none;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+
+  &.directionColumn {
+    flex-direction: column;
+  }
+
+  &.directionRow {
+    flex-direction: row;
+    padding: clamp(10px, 1.8vh, 18px) clamp(14px, 2vw, 24px);
+    gap: clamp(12px, 1.8vw, 20px);
+  }
+
+  @include respond-to(xs) {
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+    max-height: none;
+
+    &.directionRow {
+      flex-direction: column;
+      padding: 12px;
+      gap: 12px;
+    }
+  }
+}
+
+.mainArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0; 
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+
+  @include respond-to(xs) {
+    overflow: visible;
+    height: auto;
+  }
+}
+
+.contentArea {
+  flex: 1;
+  min-width: 0;
+  min-height: 0; 
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  @include respond-to(xs) {
+    overflow-y: auto;
+    height: auto;
+  }
+}

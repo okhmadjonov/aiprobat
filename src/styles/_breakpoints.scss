@@ -1,11 +1,22 @@
+$breakpoints: (
+  xs: 480px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  macbook: 1440px,
+  xxl: 1920px,
+  ultrawide: 2560px
+);
+
 $bp-xs: 480px;
 $bp-sm: 640px;
 $bp-md: 768px;
-$bp-lg: 992px;
-$bp-xl: 1200px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
 $bp-macbook: 1440px;
-$bp-xxl: 1600px;
-$bp-ultrawide: 1920px;
+$bp-xxl: 1920px;
+$bp-ultrawide: 2560px;
 
 @mixin respond-to($media) {
   @if $media == xs {
@@ -40,5 +51,55 @@ $bp-ultrawide: 1920px;
     @media only screen and (max-width: #{$bp-ultrawide}) {
       @content;
     }
+  } @else {
+    @media only screen and (max-width: $media) {
+      @content;
+    }
+  }
+}
+
+@mixin respond-above($media) {
+  @if $media == xs {
+    @media only screen and (min-width: #{$bp-xs + 1px}) {
+      @content;
+    }
+  } @else if $media == sm {
+    @media only screen and (min-width: #{$bp-sm + 1px}) {
+      @content;
+    }
+  } @else if $media == md {
+    @media only screen and (min-width: #{$bp-md + 1px}) {
+      @content;
+    }
+  } @else if $media == lg {
+    @media only screen and (min-width: #{$bp-lg + 1px}) {
+      @content;
+    }
+  } @else if $media == xl {
+    @media only screen and (min-width: #{$bp-xl + 1px}) {
+      @content;
+    }
+  } @else if $media == macbook {
+    @media only screen and (min-width: #{$bp-macbook + 1px}) {
+      @content;
+    }
+  } @else if $media == xxl {
+    @media only screen and (min-width: #{$bp-xxl + 1px}) {
+      @content;
+    }
+  } @else if $media == ultrawide {
+    @media only screen and (min-width: #{$bp-ultrawide + 1px}) {
+      @content;
+    }
+  } @else {
+    @media only screen and (min-width: ($media + 1px)) {
+      @content;
+    }
+  }
+}
+
+@mixin respond-between($min, $max) {
+  @media only screen and (min-width: $min) and (max-width: $max) {
+    @content;
   }
 }

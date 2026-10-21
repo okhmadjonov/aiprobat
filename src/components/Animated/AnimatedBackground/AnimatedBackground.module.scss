@@ -1,0 +1,48 @@
+.background {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 20%, #0d2249 0%, #061124 100%);
+}
+
+.orb1 {
+  position: absolute;
+  top: -10%;
+  left: 15%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(11, 99, 197, 0.18) 0%, rgba(11, 99, 197, 0) 70%);
+  animation: floatOrb 12s ease-in-out infinite alternate;
+}
+
+.orb2 {
+  position: absolute;
+  bottom: -15%;
+  right: 10%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(226, 166, 50, 0.12) 0%, rgba(226, 166, 50, 0) 70%);
+  animation: floatOrb 15s ease-in-out infinite alternate-reverse;
+}
+
+.wave {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(13, 34, 73, 0.4) 0%, transparent 60%);
+}
+
+@keyframes floatOrb {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, 30px) scale(1.08);
+  }
+  100% {
+    transform: translate(-30px, -40px) scale(0.96);
+  }
+}
