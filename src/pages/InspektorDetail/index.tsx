@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, Home } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import elbekPortraitImg from "@/assets/global/elbek_portrait.jpg";
+import probatsiyaInsImg from "@/assets/global/probatsiyains.png";
 import styles from "./InspektorDetail.module.scss";
 
 interface InspectorRow {
@@ -114,11 +114,11 @@ const InspektorDetail = () => {
       {/* 5.1.JPG Asosiy karta */}
       <main className={styles.mainWrapper}>
         <div className={styles.whiteCard}>
-          {/* Chapdagi inspektor portreti (Oval / Kapsula shakli) */}
+          {/* Chapdagi inspektor portreti */}
           <div className={styles.portraitContainer}>
             <img
-              src={elbekPortraitImg}
-              alt="Усмонов Элбек Уроқалиевич portreti"
+              src={probatsiyaInsImg}
+              alt="Probatsiya inspektori"
               className={styles.portraitImg}
             />
           </div>

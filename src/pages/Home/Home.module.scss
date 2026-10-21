@@ -30,10 +30,10 @@
 
 .topRightWidget {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 184px;
-  height: 398px;
+  top: 18px;
+  right: 18px;
+  width: 180px;
+  height: 385px;
   z-index: 25;
   pointer-events: none;
   display: flex;
@@ -41,22 +41,103 @@
   justify-content: flex-end;
 
   @include respond-to(md) {
-    width: 145px;
-    height: 315px;
+    top: 14px;
+    right: 14px;
+    width: 142px;
+    height: 308px;
   }
 
   @include respond-to(xs) {
-    width: 110px;
-    height: 240px;
+    top: 10px;
+    right: 10px;
+    width: 108px;
+    height: 232px;
   }
 }
 
 .widgetImage {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: top right;
-  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4));
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.42);
+
+  @include respond-to(md) {
+    border-radius: 20px;
+  }
+
+  @include respond-to(xs) {
+    border-radius: 16px;
+  }
+}
+
+.widgetDateTime {
+  position: absolute;
+  bottom: 22px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+
+  @include respond-to(md) {
+    bottom: 16px;
+  }
+
+  @include respond-to(xs) {
+    bottom: 12px;
+  }
+}
+
+.widgetTime {
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+
+  @include respond-to(md) {
+    font-size: 18px;
+  }
+
+  @include respond-to(xs) {
+    font-size: 14px;
+  }
+}
+
+.widgetDate {
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.8px;
+  margin-top: 3px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+
+  @include respond-to(md) {
+    font-size: 12px;
+  }
+
+  @include respond-to(xs) {
+    font-size: 10px;
+  }
+}
+
+@keyframes gentleFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .centerContent {
@@ -67,6 +148,8 @@
   z-index: 10;
   max-width: 90vw;
   max-height: 85vh;
+  animation: gentleFloat 5s ease-in-out infinite;
+  will-change: transform;
 }
 
 .inspector {
@@ -102,24 +185,26 @@
   right: 28px;
   width: 136px;
   height: 148px;
-  background: rgba(10, 24, 48, 0.65);
+  background: rgba(10, 24, 48, 0.72);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
-  border-radius: 26px;
+  border: none;
+  border-radius: 24px;
   padding: 14px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.48);
   z-index: 25;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 42px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.6);
   }
 
   @include respond-to(md) {

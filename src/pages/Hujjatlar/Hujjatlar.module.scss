@@ -199,24 +199,26 @@
 // 7.JPG Oq kartasi
 .whiteCard {
   width: 100%;
-  max-width: 1320px;
+  max-width: 1260px;
   height: 100%;
-  background: #f6f8fb;
+  max-height: 640px;
+  background: #ffffff;
   border-radius: 20px;
-  box-shadow: 0 16px 40px rgba(3, 14, 38, 0.35);
-  padding: 24px 36px 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  padding: 22px 32px 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
 
   @include respond-to(md) {
-    padding: 20px 24px 16px;
+    padding: 18px 22px 14px;
   }
 
   @include respond-to(xs) {
     padding: 16px 12px;
     height: auto;
+    max-height: none;
     gap: 16px;
   }
 }

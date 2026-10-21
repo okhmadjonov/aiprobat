@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, Home, Search } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import svgDistricts from "@/constants/tashkentSvgDistricts.json";
+import UzbMap from "@/components/UzbMap";
+import regionDistrictsDataRaw from "@/constants/regionDistrictsSvg.json";
+import probatsiyaInsImg from "@/assets/global/probatsiyains.png";
 import styles from "./Inspektorlar.module.scss";
 
 // 5.JPG dagi menyu ikonkalari
@@ -80,17 +82,6 @@ const SettingsMenuSvg = () => (
   </svg>
 );
 
-// 5.JPG dagi inspektor (ofitser) ikonkasi
-const OfficerSvg = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 8.5C4 6.8 7.5 4.5 12 4.5C16.5 4.5 20 6.8 20 8.5L19 10.5H5L4 8.5Z" fill="white" />
-    <path d="M4.5 10.5C7 11.5 17 11.5 19.5 10.5V11.5C19.5 12 17 13 12 13C7 13 4.5 12 4.5 11.5V10.5Z" fill="#CBD5E1" />
-    <circle cx="12" cy="7.5" r="1.2" fill="#D97706" />
-    <circle cx="12" cy="13.5" r="3.2" fill="white" />
-    <path d="M5 21C5 18 8 17 12 17C16 17 19 18 19 21" stroke="white" strokeWidth="2.2" strokeLinecap="round" />
-  </svg>
-);
-
 // Dropdown chevron ikonkasi aylanada
 const CircleChevronDown = () => (
   <div className={styles.dropdownIconCircle}>
@@ -101,49 +92,34 @@ const CircleChevronDown = () => (
   </div>
 );
 
-// Qora sichqoncha kursor ikonkasi (5.JPG dagi)
-const BlackCursorSvg = () => (
-  <svg
-    width="15"
-    height="15"
-    viewBox="0 0 24 24"
-    fill="black"
-    className={styles.cursorPointerSvg}
-  >
-    <path d="M4 2L18 11L11.5 12.5L16 21L13 22.5L8.5 14L4 18V2Z" />
-  </svg>
-);
+// Toshkent shahar tumanlari ma'lumotlari
+const tashkentDistrictsList = [
+  { id: "olmazor", name: "Olmazor tumani" },
+  { id: "yunusobod", name: "Yunusobod tumani" },
+  { id: "chilonzor", name: "Chilonzor tumani" },
+  { id: "mirzo_ulugbek", name: "Mirzo Ulug'bek tumani" },
+  { id: "shayxontohur", name: "Shayxontohur tumani" },
+  { id: "uchtepa", name: "Uchtepa tumani" },
+  { id: "yashnobod", name: "Yashnobod tumani" },
+  { id: "mirobod", name: "Mirobod tumani" },
+  { id: "yakkasaroy", name: "Yakkasaroy tumani" },
+  { id: "sergeli", name: "Sergeli tumani" },
+  { id: "yangihayot", name: "Yangihayot tumani" },
+  { id: "bektemir", name: "Bektemir tumani" },
+];
 
-// Tumanlar ma'lumotlari xaritasi
-interface DistrictInfo {
-  id: string;
-  name: string;
-  displayName: string;
-  count: number;
-}
-
-const districtDataMap: Record<string, DistrictInfo> = {
-  "Olmazor tumani": { id: "olmazor", name: "Olmazor tumani", displayName: "Olmazor tumani", count: 928 },
-  "Yunusobod tumani": { id: "yunusobod", name: "Yunusobod tumani", displayName: "Yunusobod tumani", count: 1102 },
-  "Chilonzor tumani": { id: "chilonzor", name: "Chilonzor tumani", displayName: "Chilonzor tumani", count: 845 },
-  "Mirzo ulug‘bek tumani": { id: "mirzo_ulugbek", name: "Mirzo ulug‘bek tumani", displayName: "Mirzo Ulug'bek tumani", count: 780 },
-  "Shayxontoxur tumani": { id: "shayxontohur", name: "Shayxontoxur tumani", displayName: "Shayxontohur tumani", count: 654 },
-  "Uchtepa tumani": { id: "uchtepa", name: "Uchtepa tumani", displayName: "Uchtepa tumani", count: 712 },
-  "Yashnobod tumani": { id: "yashnobod", name: "Yashnobod tumani", displayName: "Yashnobod tumani", count: 830 },
-  "Mirobod tumani": { id: "mirobod", name: "Mirobod tumani", displayName: "Mirobod tumani", count: 540 },
-  "Yakkasaroy tumani": { id: "yakkasaroy", name: "Yakkasaroy tumani", displayName: "Yakkasaroy tumani", count: 410 },
-  "Sirg‘ali tumani": { id: "sergeli", name: "Sirg‘ali tumani", displayName: "Sergeli tumani", count: 620 },
-  "Yangihayot tumani": { id: "yangihayot", name: "Yangihayot tumani", displayName: "Yangihayot tumani", count: 390 },
-  "Bektemir tumani": { id: "bektemir", name: "Bektemir tumani", displayName: "Bektemir tumani", count: 240 },
-};
+const regionDistrictsMap = regionDistrictsDataRaw as Record<
+  string,
+  { viewBox: string; features: { id: string; name: string; count: number }[] }
+>;
 
 const Inspektorlar = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState("haqida");
-  const [city, setCity] = useState("toshkent");
-  const [region, setRegion] = useState("");
-  const [selectedDistrictId, setSelectedDistrictId] = useState("olmazor");
+  const [city, setCity] = useState("all");
+  const [selectedRegionId, setSelectedRegionId] = useState("");
+  const [selectedDistrictId, setSelectedDistrictId] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
   const isRu = (i18n.language || "uz").toLowerCase().startsWith("ru");
@@ -156,18 +132,42 @@ const Inspektorlar = () => {
     { id: "sozlamalar", label: t("inspektorlar.sozlamalar", "Sozlamalar"), icon: <SettingsMenuSvg /> },
   ];
 
-  // Hozirgi tanlangan tumanning SVG va ma'lumotlari
-  const selectedDistrictObj =
-    Object.values(districtDataMap).find((d) => d.id === selectedDistrictId) ||
-    districtDataMap["Olmazor tumani"];
+  // Barcha 14 ta viloyat ro'yxati
+  const regionOptions = [
+    { id: "", uz: "Viloyatlar kesimida (Barchasi)", ru: "По областям (Все)" },
+    { id: "toshkent_sh", uz: "Toshkent shahri", ru: "город Ташкент" },
+    { id: "toshkent_vil", uz: "Toshkent viloyati", ru: "Ташкентская область" },
+    { id: "samarqand", uz: "Samarqand viloyati", ru: "Самаркандская область" },
+    { id: "fargona", uz: "Fargʻona viloyati", ru: "Ферганская область" },
+    { id: "andijon", uz: "Andijon viloyati", ru: "Андижанская область" },
+    { id: "namangan", uz: "Namangan viloyati", ru: "Наманганская область" },
+    { id: "qashqadaryo", uz: "Qashqadaryo viloyati", ru: "Кашкадарьинская область" },
+    { id: "surxondaryo", uz: "Surxondaryo viloyati", ru: "Сурхандарьинская область" },
+    { id: "buxoro", uz: "Buxoro viloyati", ru: "Бухарская область" },
+    { id: "xorazm", uz: "Xorazm viloyati", ru: "Хорезмская область" },
+    { id: "jizzax", uz: "Jizzax viloyati", ru: "Джизакская область" },
+    { id: "navoiy", uz: "Navoiy viloyati", ru: "Навоийская область" },
+    { id: "sirdaryo", uz: "Sirdaryo viloyati", ru: "Сырдарьинская область" },
+    { id: "qoraqalpogiston", uz: "Qoraqalpog‘iston respublikasi", ru: "Республика Каракалпакстан" },
+  ];
 
-  const handleDistrictSelect = (districtId: string) => {
-    setSelectedDistrictId(districtId);
-  };
+  // Hozirgi tanlangan viloyatga mos tumanlar ro'yxati
+  const currentDistrictsList = useMemo(() => {
+    if (selectedRegionId === "toshkent_sh" || city === "toshkent") {
+      return tashkentDistrictsList;
+    }
+    if (selectedRegionId && regionDistrictsMap[selectedRegionId]) {
+      return regionDistrictsMap[selectedRegionId].features.map((f) => ({
+        id: f.id,
+        name: f.name,
+      }));
+    }
+    return tashkentDistrictsList;
+  }, [selectedRegionId, city]);
 
   return (
     <div className={styles.container}>
-      {/* Chapdagi oq Sidebar paneli (5.JPG) */}
+      {/* Chapdagi oq Sidebar paneli */}
       <aside className={styles.sidebar}>
         <div className={styles.sidebarTop}>
           <button
@@ -213,67 +213,62 @@ const Inspektorlar = () => {
         </button>
       </aside>
 
-      {/* O'ngdagi katta Asosiy panel (5.JPG) */}
+      {/* O'ngdagi katta Asosiy panel */}
       <main className={styles.mainPanel}>
         <div className={styles.headerRow}>
           <h1 className={styles.goldTitle}>{t("menu.inspektorlar", "PROBATSIYA INSPEKTORLARI HAQIDA")}</h1>
           <LanguageSwitcher variant="dark" />
         </div>
 
-        {/* Real GeoJSON asosida chizilgan interaktiv Toshkent shahar tumanlari xaritasi */}
+        {/* Katta va interaktiv O'zbekiston / Viloyatlar / Tumanlar xaritasi */}
         <div className={styles.mapWrapper}>
-          <svg
-            viewBox="0 0 650 520"
-            className={styles.mapSvg}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {svgDistricts.map((d) => {
-              const info = districtDataMap[d.name];
-              const isSelected = info && info.id === selectedDistrictId;
-
-              return (
-                <path
-                  key={d.name}
-                  d={d.d}
-                  fill={isSelected ? "#1f3e82" : "#ccd2eb"}
-                  stroke="#ffffff"
-                  strokeWidth="1.6"
-                  className={styles.districtPath}
-                  onClick={() => {
-                    if (info) handleDistrictSelect(info.id);
-                  }}
-                >
-                  <title>{info ? info.displayName : d.name}</title>
-                </path>
-              );
-            })}
-          </svg>
-
-          {/* 5.JPG dagi oq ko'rsatkich Tooltip va qora kursor */}
-          <div
-            className={`${styles.mapTooltipBox} ${styles[`pos_${selectedDistrictObj.id}`] || ""}`}
-          >
-            <div className={styles.tooltipBubble}>
-              <span className={styles.tooltipNumber}>
-                {selectedDistrictObj.count} {t("inspektorlar.inspectorCount", "ta inspektor")}
-              </span>
-              <span className={styles.tooltipName}>
-                {t(`inspektorlar.districts.${selectedDistrictObj.id}`, selectedDistrictObj.displayName)}
-              </span>
-            </div>
-            <BlackCursorSvg />
-          </div>
+          <UzbMap
+            selectedRegionId={selectedRegionId}
+            selectedDistrictId={selectedDistrictId}
+            onSelectRegion={(regId) => {
+              setSelectedRegionId(regId);
+              if (regId === "toshkent_sh") {
+                setCity("toshkent");
+              } else {
+                setCity("all");
+              }
+              setSelectedDistrictId("");
+            }}
+            onSelectDistrict={(distId) => {
+              setSelectedDistrictId(distId);
+            }}
+            onBackToUzbekistan={() => {
+              setSelectedRegionId("");
+              setSelectedDistrictId("");
+              setCity("all");
+            }}
+          />
         </div>
 
         {/* Pastki boshqaruv qismi (Filters, Search, Button) */}
         <div className={styles.bottomControls}>
           <div className={styles.filtersRow}>
+            {/* 1. Shaharlar filtri */}
             <div className={styles.dropdownBox}>
               <select
                 className={styles.dropdownSelect}
                 value={city}
-                onChange={(e) => setCity(e.target.value)}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setCity(val);
+                  if (val === "toshkent") {
+                    setSelectedRegionId("toshkent_sh");
+                  } else if (val === "samarqand") {
+                    setSelectedRegionId("samarqand");
+                  } else if (val === "buxoro") {
+                    setSelectedRegionId("buxoro");
+                  } else {
+                    setSelectedRegionId("");
+                  }
+                  setSelectedDistrictId("");
+                }}
               >
+                <option value="all">{isRu ? "Все города" : "Barcha shaharlar"}</option>
                 <option value="toshkent">{t("inspektorlar.tashkentCity", "Toshkent shahri")}</option>
                 <option value="samarqand">{isRu ? "город Самарканд" : "Samarqand shahri"}</option>
                 <option value="buxoro">{isRu ? "город Бухара" : "Buxoro shahri"}</option>
@@ -281,29 +276,42 @@ const Inspektorlar = () => {
               <CircleChevronDown />
             </div>
 
+            {/* 2. Viloyatlar filtri */}
             <div className={styles.dropdownBox}>
               <select
                 className={styles.dropdownSelect}
-                value={region}
-                onChange={(e) => setRegion(e.target.value)}
+                value={selectedRegionId}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setSelectedRegionId(val);
+                  if (val === "toshkent_sh") {
+                    setCity("toshkent");
+                  } else {
+                    setCity("all");
+                  }
+                  setSelectedDistrictId("");
+                }}
               >
-                <option value="">{isRu ? "По областям" : "Viloyatlar kesimida"}</option>
-                <option value="toshkent_vil">{isRu ? "Ташкентская область" : "Toshkent viloyati"}</option>
-                <option value="surxondaryo">{isRu ? "Сурхандарьинская область" : "Surxondaryo viloyati"}</option>
-                <option value="fargona">{isRu ? "Ферганская область" : "Fargʻona viloyati"}</option>
+                {regionOptions.map((opt) => (
+                  <option key={opt.id} value={opt.id}>
+                    {isRu ? opt.ru : opt.uz}
+                  </option>
+                ))}
               </select>
               <CircleChevronDown />
             </div>
 
+            {/* 3. Tumanlar filtri */}
             <div className={styles.dropdownBox}>
               <select
                 className={styles.dropdownSelect}
                 value={selectedDistrictId}
-                onChange={(e) => handleDistrictSelect(e.target.value)}
+                onChange={(e) => setSelectedDistrictId(e.target.value)}
               >
-                {Object.values(districtDataMap).map((item) => (
+                <option value="">{isRu ? "Выберите район" : "Tumanni tanlang"}</option>
+                {currentDistrictsList.map((item) => (
                   <option key={item.id} value={item.id}>
-                    {t(`inspektorlar.districts.${item.id}`, item.displayName)}
+                    {item.name}
                   </option>
                 ))}
               </select>
@@ -327,7 +335,11 @@ const Inspektorlar = () => {
             className={styles.inspectorDataBtn}
             onClick={() => navigate("/inspektorlar/batafsil")}
           >
-            <OfficerSvg />
+            <img
+              src={probatsiyaInsImg}
+              alt="Probatsiya inspektori"
+              className={styles.inspectorBtnIcon}
+            />
             <span>{isRu ? "Данные инспектора" : "Inspektor ma'lumotlari"}</span>
           </button>
         </div>
