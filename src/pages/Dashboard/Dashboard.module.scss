@@ -351,7 +351,6 @@
   margin: 0 auto;
   align-items: stretch;
 
-  // Medium screens / Laptops / 1024px kiosk: 2 rows (3 top, 2 bottom centered)
   @media (min-width: 880px) and (max-width: 1259px) {
     grid-template-columns: repeat(6, 1fr);
     gap: 20px;
@@ -364,7 +363,6 @@
     > :nth-child(5) { grid-column: 4 / span 2; }
   }
 
-  // Tablet / Portrait screens: 3 rows (2, 2, 1 centered)
   @media (min-width: 560px) and (max-width: 879px) {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
@@ -378,7 +376,6 @@
     }
   }
 
-  // Mobile / compact screens: 1 column
   @media (max-width: 559px) {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -433,7 +430,6 @@
   }
 }
 
-// Compact height laptop screens (e.g. 1366x768)
 @media (max-height: 760px) and (min-width: 560px) {
   .headerCenter {
     margin-bottom: 14px;

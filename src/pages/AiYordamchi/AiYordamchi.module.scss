@@ -16,7 +16,6 @@
   }
 }
 
-// 6.JPG Header
 .header {
   height: 72px;
   background-color: #0b2149;
@@ -193,7 +192,6 @@
   }
 }
 
-// Asosiy maydon
 .mainWrapper {
   flex: 1;
   padding: 10px 28px 24px;
@@ -208,7 +206,6 @@
   }
 }
 
-// 6.JPG Oq kartasi
 .whiteCard {
   width: 100%;
   max-width: 1260px;
@@ -235,7 +232,6 @@
   }
 }
 
-// Karta ichki yuqori qismi: Chapda matn/savollar, O'ngda robot
 .topSection {
   display: flex;
   align-items: flex-start;
@@ -252,6 +248,74 @@
   max-width: 660px;
   display: flex;
   flex-direction: column;
+  min-height: 280px;
+}
+
+.chatHistory {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.chatMessageUser {
+  align-self: flex-end;
+  background: #113f77;
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 18px 18px 4px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  max-width: 80%;
+  box-shadow: 0 2px 6px rgba(17, 63, 119, 0.2);
+}
+
+.chatMessageBot {
+  align-self: flex-start;
+  background: #f1f5f9;
+  color: #0b2149;
+  border: 1px solid #dce4ee;
+  padding: 12px 18px;
+  border-radius: 18px 18px 18px 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+  max-width: 88%;
+}
+
+.typingIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #556987;
+  font-style: italic;
+}
+
+.chatHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.resetChatBtn {
+  background: none;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+  }
 }
 
 .promptText {
@@ -357,7 +421,6 @@
   }
 }
 
-// O'ng tomondagi 3D robot va fikrlash doiralari
 .robotColumn {
   position: relative;
   display: flex;
@@ -378,7 +441,6 @@
   }
 }
 
-// 3 ta ko'k fikrlash nuqtalari
 .speechDots {
   position: absolute;
   left: 20px;
@@ -433,7 +495,6 @@
   }
 }
 
-// Pastdagi Input qismi
 .inputWrapper {
   margin-top: 24px;
   display: flex;
@@ -514,7 +575,6 @@
   }
 }
 
-// 6.JPG rasmidagi pastki chap burchakdagi tashqi Uy tugmasi
 .bottomLeftHomeBtn {
   position: absolute;
   bottom: 12px;

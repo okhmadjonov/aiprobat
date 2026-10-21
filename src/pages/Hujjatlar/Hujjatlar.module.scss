@@ -16,7 +16,6 @@
   }
 }
 
-// 7.JPG Header
 .header {
   height: 72px;
   background-color: #0b2149;
@@ -182,7 +181,6 @@
   }
 }
 
-// Asosiy maydon
 .mainWrapper {
   flex: 1;
   padding: 10px 28px 24px;
@@ -196,7 +194,6 @@
   }
 }
 
-// 7.JPG Oq kartasi
 .whiteCard {
   width: 100%;
   max-width: 1260px;
@@ -223,7 +220,6 @@
   }
 }
 
-// 6 ta hujjat qatorlari ro'yxati
 .docsList {
   display: flex;
   flex-direction: column;
@@ -278,7 +274,6 @@
   }
 }
 
-// To'q ko'k yumaloqlangan kvadrat badge (7.JPG)
 .docIconBadge {
   width: 44px;
   height: 44px;
@@ -297,7 +292,6 @@
   }
 }
 
-// Tillarang-jigarrang matn (7.JPG)
 .docTitle {
   font-size: 21px;
   font-weight: 800;
@@ -309,7 +303,6 @@
   }
 }
 
-// O'ngdagi aylanali strelka
 .arrowCircle {
   width: 32px;
   height: 32px;
@@ -334,7 +327,6 @@
   }
 }
 
-// Pastdagi 2 ta Katta to'q ko'k tugma
 .bottomActionsRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -377,5 +369,123 @@
   @include respond-to(xs) {
     font-size: 14px;
     padding: 11px 16px;
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 33, 73, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modalCard {
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.modalHeader {
+  background: #0e3b79;
+  color: #ffffff;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modalDocTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.modalCloseBtn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.modalBody {
+  padding: 24px;
+  overflow-y: auto;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #1e293b;
+}
+
+.docMeta {
+  background: #f1f5f9;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #475569;
+  font-weight: 600;
+}
+
+.modalFooter {
+  padding: 16px 24px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.modalActionBtn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.modalPrimaryBtn {
+  background: #0e3b79;
+  color: #ffffff;
+
+  &:hover {
+    background: #0284c7;
+  }
+}
+
+.modalSecondaryBtn {
+  background: #e2e8f0;
+  color: #0f172a;
+
+  &:hover {
+    background: #cbd5e1;
   }
 }

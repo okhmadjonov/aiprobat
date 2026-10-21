@@ -30,7 +30,6 @@ interface UzbMapProps {
   onBackToUzbekistan?: () => void;
 }
 
-// Qora kursor SVG belgisi
 const BlackCursorSvg = () => (
   <svg
     width="15"
@@ -43,7 +42,6 @@ const BlackCursorSvg = () => (
   </svg>
 );
 
-// Toshkent shahar tumanlari ID va sonlari xaritasi
 const tashkentDistrictCounts: Record<string, { id: string; count: number; name: string }> = {
   "Olmazor tumani": { id: "olmazor", count: 928, name: "Olmazor tumani" },
   "Yunusobod tumani": { id: "yunusobod", count: 1102, name: "Yunusobod tumani" },
@@ -268,7 +266,6 @@ export const UzbMap = ({
             }
             onMouseLeave={() => setHoveredItem(null)}
           >
-            {/* Toshkent shahriga ulovchi yo'naltiruvchi chiziq */}
             <line
               x1="696.6"
               y1="275.5"
@@ -276,7 +273,6 @@ export const UzbMap = ({
               y2="160"
               className={styles.calloutPointerLine}
             />
-            {/* Asosiy xaritadagi Toshkent shahri markazi */}
             <circle
               cx="696.6"
               cy="275.5"
@@ -286,7 +282,6 @@ export const UzbMap = ({
               strokeWidth="2"
             />
 
-            {/* Kattalashtirilgan Toshkent shahri oynasi */}
             <rect
               x="636"
               y="16"
@@ -296,7 +291,6 @@ export const UzbMap = ({
               className={styles.calloutCard}
             />
 
-            {/* Sarlavha qismi */}
             <rect
               x="636"
               y="16"
@@ -314,7 +308,6 @@ export const UzbMap = ({
               {toshkentShaharItem.name}
             </text>
 
-            {/* 12 ta tumanning kattalashtirilgan xaritasi */}
             <svg
               x="641"
               y="48"
@@ -371,7 +364,6 @@ export const UzbMap = ({
           })}
       </svg>
 
-      {/* Tooltip pufagi va kursor */}
       {activeTooltip && (
         <div
           className={styles.tooltipBox}

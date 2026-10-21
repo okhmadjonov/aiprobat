@@ -19,7 +19,6 @@
   box-shadow: none;
   outline: none;
 
-  // Hover va tranzition effektlarini butunlay o'chiramiz
   transition: none !important;
   transform: none !important;
 
@@ -40,7 +39,6 @@
     outline: none;
   }
 
-  // Oq panellar ichida (Inspektorlar sahifasi kabi)
   &.variantDark {
     background-color: #113f77;
     color: #ffffff;

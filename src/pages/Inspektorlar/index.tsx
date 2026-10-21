@@ -8,7 +8,6 @@ import regionDistrictsDataRaw from "@/constants/regionDistrictsSvg.json";
 import probatsiyaInsImg from "@/assets/global/probatsiyains.png";
 import styles from "./Inspektorlar.module.scss";
 
-// 5.JPG dagi menyu ikonkalari
 const UsersMenuSvg = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -82,7 +81,6 @@ const SettingsMenuSvg = () => (
   </svg>
 );
 
-// Dropdown chevron ikonkasi aylanada
 const CircleChevronDown = () => (
   <div className={styles.dropdownIconCircle}>
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +90,6 @@ const CircleChevronDown = () => (
   </div>
 );
 
-// Toshkent shahar tumanlari ma'lumotlari
 const tashkentDistrictsList = [
   { id: "olmazor", name: "Olmazor tumani" },
   { id: "yunusobod", name: "Yunusobod tumani" },
@@ -132,7 +129,6 @@ const Inspektorlar = () => {
     { id: "sozlamalar", label: t("inspektorlar.sozlamalar", "Sozlamalar"), icon: <SettingsMenuSvg /> },
   ];
 
-  // Barcha 14 ta viloyat ro'yxati
   const regionOptions = [
     { id: "", uz: "Viloyatlar kesimida (Barchasi)", ru: "По областям (Все)" },
     { id: "toshkent_sh", uz: "Toshkent shahri", ru: "город Ташкент" },
@@ -151,7 +147,6 @@ const Inspektorlar = () => {
     { id: "qoraqalpogiston", uz: "Qoraqalpog‘iston respublikasi", ru: "Республика Каракалпакстан" },
   ];
 
-  // Hozirgi tanlangan viloyatga mos tumanlar ro'yxati
   const currentDistrictsList = useMemo(() => {
     if (selectedRegionId === "toshkent_sh" || city === "toshkent") {
       return tashkentDistrictsList;
@@ -165,9 +160,21 @@ const Inspektorlar = () => {
     return tashkentDistrictsList;
   }, [selectedRegionId, city]);
 
+  const filteredDistrictsList = useMemo(() => {
+    if (!searchQuery.trim()) return currentDistrictsList;
+    const q = searchQuery.toLowerCase();
+    return currentDistrictsList.filter((d) => d.name.toLowerCase().includes(q));
+  }, [currentDistrictsList, searchQuery]);
+
+  const handleGoToDetail = () => {
+    const params = new URLSearchParams();
+    if (selectedRegionId) params.set("region", selectedRegionId);
+    if (selectedDistrictId) params.set("district", selectedDistrictId);
+    navigate(`/inspektorlar/batafsil?${params.toString()}`);
+  };
+
   return (
     <div className={styles.container}>
-      {/* Chapdagi oq Sidebar paneli */}
       <aside className={styles.sidebar}>
         <div className={styles.sidebarTop}>
           <button
@@ -183,7 +190,7 @@ const Inspektorlar = () => {
 
           <div
             className={styles.activeSectionCard}
-            onClick={() => setActiveTab("haqida")}
+            onClick={() => setActiveTab("inspektorlar")}
           >
             {t("inspektorlar.title", "Probatsiya inspektorlari haqida")}
           </div>
@@ -213,136 +220,210 @@ const Inspektorlar = () => {
         </button>
       </aside>
 
-      {/* O'ngdagi katta Asosiy panel */}
       <main className={styles.mainPanel}>
         <div className={styles.headerRow}>
           <h1 className={styles.goldTitle}>{t("menu.inspektorlar", "PROBATSIYA INSPEKTORLARI HAQIDA")}</h1>
           <LanguageSwitcher variant="dark" />
         </div>
 
-        {/* Katta va interaktiv O'zbekiston / Viloyatlar / Tumanlar xaritasi */}
-        <div className={styles.mapWrapper}>
-          <UzbMap
-            selectedRegionId={selectedRegionId}
-            selectedDistrictId={selectedDistrictId}
-            onSelectRegion={(regId) => {
-              setSelectedRegionId(regId);
-              if (regId === "toshkent_sh") {
-                setCity("toshkent");
-              } else {
-                setCity("all");
-              }
-              setSelectedDistrictId("");
-            }}
-            onSelectDistrict={(distId) => {
-              setSelectedDistrictId(distId);
-            }}
-            onBackToUzbekistan={() => {
-              setSelectedRegionId("");
-              setSelectedDistrictId("");
-              setCity("all");
-            }}
-          />
-        </div>
-
-        {/* Pastki boshqaruv qismi (Filters, Search, Button) */}
-        <div className={styles.bottomControls}>
-          <div className={styles.filtersRow}>
-            {/* 1. Shaharlar filtri */}
-            <div className={styles.dropdownBox}>
-              <select
-                className={styles.dropdownSelect}
-                value={city}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setCity(val);
-                  if (val === "toshkent") {
-                    setSelectedRegionId("toshkent_sh");
-                  } else if (val === "samarqand") {
-                    setSelectedRegionId("samarqand");
-                  } else if (val === "buxoro") {
-                    setSelectedRegionId("buxoro");
-                  } else {
-                    setSelectedRegionId("");
-                  }
-                  setSelectedDistrictId("");
-                }}
-              >
-                <option value="all">{isRu ? "Все города" : "Barcha shaharlar"}</option>
-                <option value="toshkent">{t("inspektorlar.tashkentCity", "Toshkent shahri")}</option>
-                <option value="samarqand">{isRu ? "город Самарканд" : "Samarqand shahri"}</option>
-                <option value="buxoro">{isRu ? "город Бухара" : "Buxoro shahri"}</option>
-              </select>
-              <CircleChevronDown />
+        {activeTab === "statistika" && (
+          <div className={styles.tabContentPanel}>
+            <h2 className={styles.panelTitle}>Respublika bo'yicha probatsiya statistikasi</h2>
+            <div className={styles.statsGrid}>
+              <div className={styles.statCard}>
+                <span className={styles.statNumber}>42,850</span>
+                <span className={styles.statLabel}>Jami hisobda turgan shaxslar</span>
+              </div>
+              <div className={styles.statCard}>
+                <span className={styles.statNumber}>31,420</span>
+                <span className={styles.statLabel}>Bandligi ta'minlanganlar (73.3%)</span>
+              </div>
+              <div className={styles.statCard}>
+                <span className={styles.statNumber}>2,410</span>
+                <span className={styles.statLabel}>Elektron bilaguzuk taqilganlar</span>
+              </div>
+              <div className={styles.statCard}>
+                <span className={styles.statNumber}>8,640</span>
+                <span className={styles.statLabel}>Moddiy yordam olganlar</span>
+              </div>
             </div>
+          </div>
+        )}
 
-            {/* 2. Viloyatlar filtri */}
-            <div className={styles.dropdownBox}>
-              <select
-                className={styles.dropdownSelect}
-                value={selectedRegionId}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setSelectedRegionId(val);
-                  if (val === "toshkent_sh") {
+        {activeTab === "vositalar" && (
+          <div className={styles.tabContentPanel}>
+            <h2 className={styles.panelTitle}>Raqamli monitoring va nazorat vositalari</h2>
+            <div className={styles.toolsList}>
+              <div className={styles.toolItem}>
+                <span className={styles.toolTitle}>GPS / LBS Elektron bilaguzuk tizimi</span>
+                <span className={styles.toolStatus}>Faol ishlamoqda</span>
+              </div>
+              <div className={styles.toolItem}>
+                <span className={styles.toolTitle}>Face ID Biometrik verifikatsiya</span>
+                <span className={styles.toolStatus}>Faol ishlamoqda</span>
+              </div>
+              <div className={styles.toolItem}>
+                <span className={styles.toolTitle}>E-Probatsiya integratsiyalashgan axborot tizimi</span>
+                <span className={styles.toolStatus}>Faol ishlamoqda</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "hisobotlar" && (
+          <div className={styles.tabContentPanel}>
+            <h2 className={styles.panelTitle}>Tizim hisobotlari va monitoring axborotlari</h2>
+            <div className={styles.toolsList}>
+              <div className={styles.toolItem}>
+                <span className={styles.toolTitle}>Oylik nazorat va profilaktika monitoringi</span>
+                <span className={styles.toolStatus}>Mavjud</span>
+              </div>
+              <div className={styles.toolItem}>
+                <span className={styles.toolTitle}>Mahkumlarning ijtimoiy reabilitatsiyasi to'g'risida axborot</span>
+                <span className={styles.toolStatus}>Mavjud</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "sozlamalar" && (
+          <div className={styles.tabContentPanel}>
+            <h2 className={styles.panelTitle}>Tizim sozlamalari</h2>
+            <div className={styles.toolsList}>
+              <div className={styles.toolItem}>
+                <span className={styles.toolTitle}>Dasturiy ta'minot: Probatsiya Kiosk Edition v2.4</span>
+                <span className={styles.toolStatus}>Eng so'nggi versiya</span>
+              </div>
+              <div className={styles.toolItem}>
+                <span className={styles.toolTitle}>Xavfsiz IIV ichki tarmog'iga ulanish</span>
+                <span className={styles.toolStatus}>Himoyalangan</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {(activeTab === "inspektorlar" || activeTab === "haqida") && (
+          <>
+            <div className={styles.mapWrapper}>
+              <UzbMap
+                selectedRegionId={selectedRegionId}
+                selectedDistrictId={selectedDistrictId}
+                onSelectRegion={(regId) => {
+                  setSelectedRegionId(regId);
+                  if (regId === "toshkent_sh") {
                     setCity("toshkent");
                   } else {
                     setCity("all");
                   }
                   setSelectedDistrictId("");
                 }}
-              >
-                {regionOptions.map((opt) => (
-                  <option key={opt.id} value={opt.id}>
-                    {isRu ? opt.ru : opt.uz}
-                  </option>
-                ))}
-              </select>
-              <CircleChevronDown />
+                onSelectDistrict={(distId) => {
+                  setSelectedDistrictId(distId);
+                }}
+                onBackToUzbekistan={() => {
+                  setSelectedRegionId("");
+                  setSelectedDistrictId("");
+                  setCity("all");
+                }}
+              />
             </div>
 
-            {/* 3. Tumanlar filtri */}
-            <div className={styles.dropdownBox}>
-              <select
-                className={styles.dropdownSelect}
-                value={selectedDistrictId}
-                onChange={(e) => setSelectedDistrictId(e.target.value)}
+            <div className={styles.bottomControls}>
+              <div className={styles.filtersRow}>
+                <div className={styles.dropdownBox}>
+                  <select
+                    className={styles.dropdownSelect}
+                    value={city}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setCity(val);
+                      if (val === "toshkent") {
+                        setSelectedRegionId("toshkent_sh");
+                      } else if (val === "samarqand") {
+                        setSelectedRegionId("samarqand");
+                      } else if (val === "buxoro") {
+                        setSelectedRegionId("buxoro");
+                      } else {
+                        setSelectedRegionId("");
+                      }
+                      setSelectedDistrictId("");
+                    }}
+                  >
+                    <option value="all">{isRu ? "Все города" : "Barcha shaharlar"}</option>
+                    <option value="toshkent">{t("inspektorlar.tashkentCity", "Toshkent shahri")}</option>
+                    <option value="samarqand">{isRu ? "город Самарканд" : "Samarqand shahri"}</option>
+                    <option value="buxoro">{isRu ? "город Бухара" : "Buxoro shahri"}</option>
+                  </select>
+                  <CircleChevronDown />
+                </div>
+
+                <div className={styles.dropdownBox}>
+                  <select
+                    className={styles.dropdownSelect}
+                    value={selectedRegionId}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setSelectedRegionId(val);
+                      if (val === "toshkent_sh") {
+                        setCity("toshkent");
+                      } else {
+                        setCity("all");
+                      }
+                      setSelectedDistrictId("");
+                    }}
+                  >
+                    {regionOptions.map((opt) => (
+                      <option key={opt.id} value={opt.id}>
+                        {isRu ? opt.ru : opt.uz}
+                      </option>
+                    ))}
+                  </select>
+                  <CircleChevronDown />
+                </div>
+
+                <div className={styles.dropdownBox}>
+                  <select
+                    className={styles.dropdownSelect}
+                    value={selectedDistrictId}
+                    onChange={(e) => setSelectedDistrictId(e.target.value)}
+                  >
+                    <option value="">{isRu ? "Выберите район" : "Tumanni tanlang"}</option>
+                    {filteredDistrictsList.map((item) => (
+                      <option key={item.id} value={item.id}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                  <CircleChevronDown />
+                </div>
+              </div>
+
+              <div className={styles.searchBox}>
+                <input
+                  type="text"
+                  className={styles.searchInput}
+                  placeholder={isRu ? "Поиск инспектора по ФИО...." : "Inspektor ism-familiyasini qidirish...."}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <Search size={22} className={styles.searchIcon} strokeWidth={2.4} />
+              </div>
+
+              <button
+                type="button"
+                className={styles.inspectorDataBtn}
+                onClick={handleGoToDetail}
               >
-                <option value="">{isRu ? "Выберите район" : "Tumanni tanlang"}</option>
-                {currentDistrictsList.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-              <CircleChevronDown />
+                <img
+                  src={probatsiyaInsImg}
+                  alt="Probatsiya inspektori"
+                  className={styles.inspectorBtnIcon}
+                />
+                <span>{isRu ? "Данные инспектора" : "Inspektor ma'lumotlari"}</span>
+              </button>
             </div>
-          </div>
-
-          <div className={styles.searchBox}>
-            <input
-              type="text"
-              className={styles.searchInput}
-              placeholder={isRu ? "Поиск инспектора по ФИО...." : "Inspektor ism-familiyasini qidirish...."}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Search size={22} className={styles.searchIcon} strokeWidth={2.4} />
-          </div>
-
-          <button
-            type="button"
-            className={styles.inspectorDataBtn}
-            onClick={() => navigate("/inspektorlar/batafsil")}
-          >
-            <img
-              src={probatsiyaInsImg}
-              alt="Probatsiya inspektori"
-              className={styles.inspectorBtnIcon}
-            />
-            <span>{isRu ? "Данные инспектора" : "Inspektor ma'lumotlari"}</span>
-          </button>
-        </div>
+          </>
+        )}
       </main>
     </div>
   );

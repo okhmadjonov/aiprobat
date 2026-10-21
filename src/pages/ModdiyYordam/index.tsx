@@ -5,7 +5,6 @@ import { ArrowLeft, Home } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import styles from "./ModdiyYordam.module.scss";
 
-// 1. Info Icon ("Moddiy yordam nima ?") - 4.JPG dagidek
 const InfoSvg = () => (
   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="12" cy="7" r="2" fill="white" />
@@ -19,7 +18,6 @@ const InfoSvg = () => (
   </svg>
 );
 
-// 2. Hierarchy Icon ("Ajratish ketma-ketligi (sxema)") - 4.JPG dagidek
 const HierarchySvg = () => (
   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="8" y="3" width="8" height="6" rx="1.2" fill="white" />
@@ -35,7 +33,6 @@ const HierarchySvg = () => (
   </svg>
 );
 
-// 3. Document Icon ("Kerakli hujjatlar ro'yxati") - 4.JPG dagidek
 const DocumentSvg = () => (
   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -49,7 +46,6 @@ const DocumentSvg = () => (
   </svg>
 );
 
-// 4. Pencil Icon ("Ariza namunasi") - 4.JPG dagidek
 const PencilSvg = () => (
   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -63,7 +59,6 @@ const PencilSvg = () => (
   </svg>
 );
 
-// 5. Question Icon ("Ko'p beriladigan savollar") - 4.JPG dagidek
 const QuestionSvg = () => (
   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -76,7 +71,6 @@ const QuestionSvg = () => (
   </svg>
 );
 
-// O'ng tomondagi doiracha ichidagi oq strelka
 const ArrowRightSvg = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -89,7 +83,6 @@ const ArrowRightSvg = () => (
   </svg>
 );
 
-// Mustaqil soat komponenti
 const LiveClock = () => {
   const [dateTime, setDateTime] = useState("");
 
@@ -111,9 +104,76 @@ const LiveClock = () => {
   return <span className={styles.clockText}>{dateTime || "09:30 10.10.2026"}</span>;
 };
 
+interface TopicDetail {
+  id: string;
+  title: string;
+  body: string;
+  actionText?: string;
+}
+
+const topicDetails: Record<string, TopicDetail> = {
+  what: {
+    id: "what",
+    title: "Bir martalik moddiy yordam nima?",
+    body: `Bir martalik moddiy yordam — bu sud hukmi bilan ozodlikdan mahrum etish bilan bog'liq bo'lmagan jazolarga hukm qilingan yoki jazoni o'tab qaytgan, ijtimoiy himoyaga muhtoj fuqarolarning hayotiy sharoitlarini yaxshilash va ularni jamiyatga moslashtirish maqsadida davlat tomonidan qaytarib olinmaslik sharti bilan ajratiladigan bir martalik pul mablag'idir.
+
+Mablag' miqdori Vazirlar Mahkamasining tegishli qarorlariga asosan bazaviy hisoblash miqdori (BHM) doirasida belgilanadi.`,
+  },
+  flow: {
+    id: "flow",
+    title: "Moddiy yordam ajratish ketma-ketligi (sxema)",
+    body: `1. Murojaat: Fuqaro o'zi yashab turgan hududdagi probatsiya bo'linmasi inspektoriga yoki 'Inson' ijtimoiy xizmatlar markaziga ariza bilan murojaat qiladi.
+2. O'rganish: Mahalla fuqarolar yig'ini faollari va inspektor ishtirokida fuqaroning yashash va moddiy sharoiti 3 ish kuni ichida joyiga chiqqan holda o'rganiladi va dalolatnoma tuziladi.
+3. Xulosa: Tuman (shahar) komissiyasi tomonidan hujjatlar 7 ish kuni ichida ko'rib chiqilib, yordam ajratish yoki rad etish haqida qaror qabul qilinadi.
+4. To'lov: Ijobiy qaror qabul qilingach, mablag'lar 5 bank kuni ichida fuqaroning bank plastik kartasiga yoki Xalq banki orqali to'lab beriladi.`,
+  },
+  docs: {
+    id: "docs",
+    title: "Kerakli hujjatlar ro'yxati",
+    body: `Moddiy yordam olish uchun quyidagi hujjatlar taqdim etiladi:
+• Shaxsni tasdiqlovchi hujjat (fuqarolik pasporti yoki ID-karta);
+• Tuman probatsiya bo'limi boshlig'i nomiga yozilgan ariza;
+• Yashash joyidan oila a'zolari va daromadlari to'g'risida ma'lumot (elektron tizim orqali olinishi ham mumkin);
+• Fuqaroning nomiga ochilgan bank kartasi rekviziti (20 talik hisobraqam).`,
+  },
+  sample: {
+    id: "sample",
+    title: "Ariza namunasi",
+    body: `                                                        Tuman (shahar) probatsiya bo'limi boshlig'iga
+                                                        Manzil: _______________________________
+                                                        Fuqaro: _______________________________
+                                                        Telefon: ______________________________
+
+                                              ARIZA
+
+  Men, ______________________________________________________________________,
+  hozirgi kunda oilaviy va moddiy jihatdan og'ir ahvolda qolganligim sababli,
+  amaldagi qonunchilik hujjatlariga asosan menga bir martalik moddiy yordam
+  ajratishingizni so'rayman.
+
+  Haqiqatan ham moddiy yordamga muhtojligimni tasdiqlovchi hujjatlarni ilova qilaman.
+
+  Sana: ____.____.2026-yil                                   Imzo: _______________`,
+    actionText: "Arizani yuklab olish (TXT)",
+  },
+  faq: {
+    id: "faq",
+    title: "Ko'p beriladigan savollar",
+    body: `1-savol: Moddiy yordam pulini keyinchalik davlatga qaytarish kerakmi?
+Javob: Yo'q, ushbu yordam qaytarilmaydigan bir martalik ijtimoiy ko'mak hisoblanadi.
+
+2-savol: Ariza ko'rib chiqilishi uchun qancha vaqt ketadi?
+Javob: Ariza topshirilgan kundan boshlab to'liq o'rganish va qaror qabul qilish jarayoni ko'pi bilan 10-15 ish kunini tashkil qiladi.
+
+3-savol: Kimlarga moddiy yordam berilishi rad etilishi mumkin?
+Javob: Doimiy yetarli daromadga ega bo'lgan yoki noto'g'ri (soxta) ma'lumotlar taqdim etilgan holatlarda rad etiladi.`,
+  },
+};
+
 const ModdiyYordam = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [selectedTopic, setSelectedTopic] = useState<TopicDetail | null>(null);
 
   const helpTopics = [
     {
@@ -142,6 +202,21 @@ const ModdiyYordam = () => {
       icon: <QuestionSvg />,
     },
   ];
+
+  const handleOpenTopic = (id: string) => {
+    setSelectedTopic(topicDetails[id] || topicDetails.what);
+  };
+
+  const handleDownloadSample = () => {
+    if (!selectedTopic) return;
+    const blob = new Blob([selectedTopic.body], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "ariza_namunasi.txt";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className={styles.container}>
@@ -180,9 +255,7 @@ const ModdiyYordam = () => {
               type="button"
               key={topic.id}
               className={styles.itemCard}
-              onClick={() => {
-                // Kelgusida kerakli sub-modal yoki tafsilot sahifasiga yo'naltirish mumkin
-              }}
+              onClick={() => handleOpenTopic(topic.id)}
             >
               <div className={styles.leftSide}>
                 <div className={styles.circleIcon}>{topic.icon}</div>
@@ -195,6 +268,44 @@ const ModdiyYordam = () => {
           ))}
         </div>
       </main>
+
+      {selectedTopic && (
+        <div className={styles.modalOverlay} onClick={() => setSelectedTopic(null)}>
+          <div className={styles.modalCard} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h2 className={styles.modalDocTitle}>{selectedTopic.title}</h2>
+              <button
+                type="button"
+                className={styles.modalCloseBtn}
+                onClick={() => setSelectedTopic(null)}
+              >
+                ✕
+              </button>
+            </div>
+            <div className={styles.modalBody}>
+              <div style={{ whiteSpace: "pre-line" }}>{selectedTopic.body}</div>
+            </div>
+            <div className={styles.modalFooter}>
+              {selectedTopic.actionText && (
+                <button
+                  type="button"
+                  className={`${styles.modalActionBtn} ${styles.modalPrimaryBtn}`}
+                  onClick={handleDownloadSample}
+                >
+                  {selectedTopic.actionText}
+                </button>
+              )}
+              <button
+                type="button"
+                className={`${styles.modalActionBtn} ${styles.modalSecondaryBtn}`}
+                onClick={() => setSelectedTopic(null)}
+              >
+                Yopish
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

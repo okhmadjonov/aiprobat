@@ -5,7 +5,6 @@ import { ArrowLeft, Home } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import styles from "./Hujjatlar.module.scss";
 
-// 7.JPG dagi SVG ikonkalar
 const OpenBookSvg = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -52,7 +51,6 @@ const ListItemsSvg = () => (
   </svg>
 );
 
-// Pastdagi Audio ikonkasi
 const AudioSpeakerSvg = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="white" strokeWidth="2.4" strokeLinejoin="round" />
@@ -65,7 +63,6 @@ const AudioSpeakerSvg = () => (
   </svg>
 );
 
-// O'ng tomondagi doiracha ichidagi oq strelka
 const ArrowRightSvg = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -78,7 +75,6 @@ const ArrowRightSvg = () => (
   </svg>
 );
 
-// Mustaqil soat komponenti
 const LiveClock = () => {
   const [dateTime, setDateTime] = useState("");
 
@@ -100,11 +96,83 @@ const LiveClock = () => {
   return <span className={styles.clockText}>{dateTime || "09:30 10.10.2026"}</span>;
 };
 
+interface DocDetail {
+  id: string;
+  category: string;
+  title: string;
+  number: string;
+  date: string;
+  content: string;
+}
+
+const docsDatabase: Record<string, DocDetail> = {
+  qonunlar: {
+    id: "qonunlar",
+    category: "Qonun",
+    title: "O'zbekiston Respublikasining 'Probatsiya to'g'risida'gi Qonuni",
+    number: "O'RQ-883-son",
+    date: "2023-yil 14-noyabr",
+    content: `1-modda. Ushbu Qonunning maqsadi va vazifalari
+Ushbu Qonunning asosiy maqsadi probatsiya sohasidagi munosabatlarni tartibga solish, ozodlikdan mahrum qilish bilan bog'liq bo'lmagan jazolarga hukm qilingan shaxslarning xulq-atvori ustidan ta'sirchan nazoratni ta'minlash hamda ularning ijtimoiy reabilitatsiyasini amalga oshirishdan iborat.
+
+2-modda. Probatsiya nazoratidagi shaxslarning huquq va majburiyatlari
+Probatsiya nazorati ostidagi shaxslar o'z huquqlari to'g'risida to'liq axborot olish, tibbiy, psixologik va ijtimoiy yordamdan foydalanish huquqiga ega. Shu bilan birga, ular sud tomonidan yuklangan majburiyatlarni to'liq bajarishi, probatsiya organiga belgilangan vaqtlarda ro'yxatdan o'tish uchun kelishi shart.`,
+  },
+  farmonlar: {
+    id: "farmonlar",
+    category: "Prezident Farmoni",
+    title: "Ozodlikdan mahrum etish bilan bog'liq bo'lmagan jazolarning ijrosini ta'minlash tizimini takomillashtirish to'g'risida",
+    number: "PF-5580-son",
+    date: "2018-yil 7-noyabr",
+    content: `O'zbekiston Respublikasi Prezidentining Farmoni bilan O'zbekiston Respublikasi IIV Jazoni ijro etish bosh boshqarmasi huzurida Probatsiya xizmati tashkil etilgan.
+
+Asosiy vazifalar etib quyidagilar belgilangan:
+1. Mahkumlarning qayta jinoyat sodir etishining oldini olish va profilaktik nazoratni kuchaytirish;
+2. Elektron bilaguzuklar va raqamli monitoring vositalaridan keng foydalanish;
+3. Mahkumlarni kasb-hunarga o'rgatish va bandligini ta'minlash orqali jamiyatga sog'lom integratsiyalashuviga ko'maklashish.`,
+  },
+  qarorlar: {
+    id: "qarorlar",
+    category: "Vazirlar Mahkamasi Qarori",
+    title: "Probatsiya nazoratidagi shaxslarni ijtimoiy moslashtirish chora-tadbirlari to'g'risida",
+    number: "VMQ-745-son",
+    date: "2021-yil 16-sentyabr",
+    content: `Mazkur qaror bilan jazoni o'tab qaytgan va probatsiya hisobida turgan fuqarolarga bir martalik moddiy yordam ajratish, ularni bepul kasbiy ta'lim bilan qamrab olish va imtiyozli subsidiyalar ajratish tartibi belgilangan.
+
+Ijtimoiy yordam ko'rsatish tuman (shahar) hokimliklari va 'Inson' ijtimoiy xizmatlar markazlari bilan hamkorlikda amalga oshiriladi.`,
+  },
+  iiv: {
+    id: "iiv",
+    category: "IIV Buyrug'i",
+    title: "Probatsiya bo'linmalari xodimlarining faoliyatini tashkil etish to'g'risida yo'riqnoma",
+    number: "231-sonli buyruq",
+    date: "2022-yil 24-fevral",
+    content: `IIV Probatsiya xizmati inspektorlarining kundalik xizmat vazifalari, mahkumlar bilan individual suhbatlar o'tkazish, elektron bilaguzuk signallarini nazorat qilish va yashash joyi bo'yicha tungi tekshiruvlarni amalga oshirish tartibi ushbu buyruq bilan belgilanadi.`,
+  },
+  nizomlar: {
+    id: "nizomlar",
+    category: "Nizom",
+    title: "Axloq tuzatish ishlari va majburiy jamoat ishlarini ijro etish Nizomi",
+    number: "Adliya vazirligi №3124",
+    date: "2020-yil 12-may",
+    content: `Nizomga muvofiq, axloq tuzatish ishlari jazosiga hukm qilingan shaxslarning ish haqidan ushlab qolinadigan mablag'lar har oyda davlat daromadiga o'tkaziladi. Ish beruvchi mahkumning ish joyini probatsiya organining ruxsatisiz o'zgartirishga haqli emas.`,
+  },
+  boshqa: {
+    id: "boshqa",
+    category: "Qoidalar",
+    title: "Probatsiya nazoratidagi shaxslarga nisbatan elektron bilaguzuklarni qo'llash qoidalari",
+    number: "19-sonli idoralararo qaror",
+    date: "2023-yil 5-aprel",
+    content: `Ozodlikni cheklash jazosi tayinlangan shaxslarga yashash hududini tark etmaslikni nazorat qilish maqsadida elektron bilaguzuk taqiladi. Qurilmani qasddan buzish yoki yechish qat'iy javobgarlikka sabab bo'ladi va jazoni yanada og'irroq turiga almashtirishga asos bo'ladi.`,
+  },
+};
+
 const Hujjatlar = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [selectedDoc, setSelectedDoc] = useState<DocDetail | null>(null);
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
-  // 7.JPG dagi 6 ta bo'lim
   const documentItems = [
     { id: "qonunlar", title: t("hujjatlar.qonunlar", "Qonunlar"), icon: <OpenBookSvg /> },
     { id: "farmonlar", title: t("hujjatlar.farmonlar", "Prezident farmonlari"), icon: <DocumentSvg /> },
@@ -122,9 +190,49 @@ const Hujjatlar = () => {
     { id: "boshqa", title: t("hujjatlar.boshqa", "Boshqa hujjatlar"), icon: <DocumentSvg /> },
   ];
 
+  const handleOpenDoc = (id: string) => {
+    const doc = docsDatabase[id] || docsDatabase.qonunlar;
+    setSelectedDoc(doc);
+  };
+
+  const handleToggleAudio = () => {
+    if (!("speechSynthesis" in window)) return;
+
+    if (isPlayingAudio) {
+      window.speechSynthesis.cancel();
+      setIsPlayingAudio(false);
+      return;
+    }
+
+    const textToRead = selectedDoc
+      ? `${selectedDoc.title}. ${selectedDoc.content}`
+      : `${docsDatabase.qonunlar.title}. ${docsDatabase.qonunlar.content}`;
+
+    const utterance = new SpeechSynthesisUtterance(textToRead);
+    utterance.lang = "uz-UZ";
+    utterance.rate = 0.95;
+    utterance.onend = () => setIsPlayingAudio(false);
+    utterance.onerror = () => setIsPlayingAudio(false);
+
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+    setIsPlayingAudio(true);
+  };
+
+  const handleDownloadDoc = () => {
+    const doc = selectedDoc || docsDatabase.qonunlar;
+    const fileContent = `${doc.title}\n${doc.number} | ${doc.date}\n\n${doc.content}`;
+    const blob = new Blob([fileContent], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${doc.id}_hujjat.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className={styles.container}>
-      {/* 7.JPG Header */}
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           <button
@@ -153,17 +261,15 @@ const Hujjatlar = () => {
         </div>
       </header>
 
-      {/* 7.JPG Asosiy karta */}
       <main className={styles.mainWrapper}>
         <div className={styles.whiteCard}>
-          {/* 6 ta gorizontal qator */}
           <div className={styles.docsList}>
             {documentItems.map((item) => (
               <button
                 type="button"
                 key={item.id}
                 className={styles.docCard}
-                onClick={() => navigate("/jazo-turlari/batafsil")}
+                onClick={() => handleOpenDoc(item.id)}
               >
                 <div className={styles.docLeft}>
                   <div className={styles.docIconBadge}>{item.icon}</div>
@@ -176,17 +282,18 @@ const Hujjatlar = () => {
             ))}
           </div>
 
-          {/* Pastdagi 2 ta Katta to'q ko'k tugma */}
           <div className={styles.bottomActionsRow}>
             <button
               type="button"
               className={styles.actionBigBtn}
-              onClick={() => {
-                // Audio shaklda eshitish funksiyasi
-              }}
+              onClick={handleToggleAudio}
             >
               <AudioSpeakerSvg />
-              <span>{t("hujjatlar.audio", "Audio shaklda eshitish")}</span>
+              <span>
+                {isPlayingAudio
+                  ? "Audioni to'xtatish"
+                  : t("hujjatlar.audio", "Audio shaklda eshitish")}
+              </span>
             </button>
 
             <button
@@ -200,6 +307,45 @@ const Hujjatlar = () => {
           </div>
         </div>
       </main>
+
+      {selectedDoc && (
+        <div className={styles.modalOverlay} onClick={() => setSelectedDoc(null)}>
+          <div className={styles.modalCard} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h2 className={styles.modalDocTitle}>{selectedDoc.title}</h2>
+              <button
+                type="button"
+                className={styles.modalCloseBtn}
+                onClick={() => setSelectedDoc(null)}
+              >
+                ✕
+              </button>
+            </div>
+            <div className={styles.modalBody}>
+              <div className={styles.docMeta}>
+                Hujjat turi: {selectedDoc.category} | Raqami: {selectedDoc.number} | Qabul qilingan: {selectedDoc.date}
+              </div>
+              <div style={{ whiteSpace: "pre-line" }}>{selectedDoc.content}</div>
+            </div>
+            <div className={styles.modalFooter}>
+              <button
+                type="button"
+                className={`${styles.modalActionBtn} ${styles.modalSecondaryBtn}`}
+                onClick={handleDownloadDoc}
+              >
+                Yuklab olish (TXT)
+              </button>
+              <button
+                type="button"
+                className={`${styles.modalActionBtn} ${styles.modalPrimaryBtn}`}
+                onClick={handleToggleAudio}
+              >
+                {isPlayingAudio ? "Audioni to'xtatish" : "Audio eshitish"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -5,7 +5,6 @@ import { ArrowLeft, Home } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import styles from "./Header.module.scss";
 
-// Mustaqil jonli soat komponenti
 export const LiveClock = () => {
   const [dateTime, setDateTime] = useState("");
 
@@ -59,7 +58,6 @@ const Header: React.FC<HeaderProps> = ({
     }
   };
 
-  // Resolve display title (either from titleKey translation or title prop)
   const displayTitle = titleKey ? t(titleKey, title || "") : title;
 
   return (

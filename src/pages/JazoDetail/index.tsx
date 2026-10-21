@@ -19,6 +19,8 @@ import cornerOrnamentImg from "@/assets/global/bookcorner.png";
 import goldScalesImg from "@/assets/global/booktoptitle.png";
 import styles from "./JazoDetail.module.scss";
 
+import type { TFunction } from "i18next";
+
 interface JazoItem {
   id: string;
   code: string;
@@ -30,8 +32,7 @@ interface JazoItem {
   supervisor: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const getJazoData = (t: any, isRu: boolean): JazoItem[] => [
+const getJazoData = (t: TFunction, isRu: boolean): JazoItem[] => [
   {
     id: "ati",
     code: isRu ? "ИТР —" : "ATI —",
@@ -112,7 +113,6 @@ const getJazoData = (t: any, isRu: boolean): JazoItem[] => [
   },
 ];
 
-// Qog'oz varoqlanishi ovozi (Web Audio API orqali, hech qanday fayl talab etilmaydi)
 const playPageFlipSound = () => {
   try {
     const AudioCtx =
@@ -147,8 +147,8 @@ const playPageFlipSound = () => {
 
     noise.start();
     noise.stop(ctx.currentTime + 0.1);
-  } catch {
-    // Brauzer audio bloklasa xatolik bermaydi
+  } catch (err) {
+    void err;
   }
 };
 
@@ -169,7 +169,6 @@ const BookPage = forwardRef<HTMLDivElement, PageProps>(
 );
 BookPage.displayName = "BookPage";
 
-// Soat mustaqil komponent sifatida ajratildi (FlipBook re-render bo'lmasligi uchun)
 const LiveClock = () => {
   const [dateTime, setDateTime] = useState("");
 
@@ -209,16 +208,12 @@ const JazoDetail = () => {
   );
   const [selectedIndex, setSelectedIndex] = useState(initialIdx);
 
-  // URL parametri o'zgarganda sahifaga burish
   useEffect(() => {
     const foundIdx = jazoData.findIndex((item) => item.id === initialId);
-    if (foundIdx !== -1 && foundIdx !== selectedIndex) {
-      setSelectedIndex(foundIdx);
-      if (flipBookRef.current) {
-        const api = flipBookRef.current.pageFlip();
-        if (api && typeof api.turnToPage === "function") {
-          api.turnToPage(foundIdx * 2);
-        }
+    if (foundIdx !== -1 && flipBookRef.current) {
+      const api = flipBookRef.current.pageFlip();
+      if (api && typeof api.turnToPage === "function") {
+        api.turnToPage(foundIdx * 2);
       }
     }
   }, [initialId, jazoData]);

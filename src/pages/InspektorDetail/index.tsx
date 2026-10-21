@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, Home } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
@@ -11,6 +11,32 @@ interface InspectorRow {
   value: string;
   isBlue: boolean;
 }
+
+const regionNamesMap: Record<string, string> = {
+  toshkent_sh: "Toshkent shahri",
+  toshkent_vil: "Toshkent viloyati",
+  samarqand: "Samarqand viloyati",
+  fargona: "Fargʻona viloyati",
+  andijon: "Andijon viloyati",
+  namangan: "Namangan viloyati",
+  qashqadaryo: "Qashqadaryo viloyati",
+  surxondaryo: "Surxondaryo viloyati",
+  buxoro: "Buxoro viloyati",
+  xorazm: "Xorazm viloyati",
+  jizzax: "Jizzax viloyati",
+  navoiy: "Navoiy viloyati",
+  sirdaryo: "Sirdaryo viloyati",
+  qoraqalpogiston: "Qoraqalpog‘iston respublikasi",
+};
+
+const formatDistrictName = (raw: string): string => {
+  if (!raw) return "Sho'rchi tumani";
+  const formatted = raw
+    .split("_")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+  return formatted.toLowerCase().includes("tumani") ? formatted : `${formatted} tumani`;
+};
 
 const LiveClock = () => {
   const [dateTime, setDateTime] = useState("");
@@ -35,7 +61,14 @@ const LiveClock = () => {
 
 const InspektorDetail = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { t } = useTranslation();
+
+  const regParam = searchParams.get("region") || "";
+  const distParam = searchParams.get("district") || "";
+
+  const regionName = regionNamesMap[regParam] || (regParam ? regParam : "Surxondaryo viloyati");
+  const districtName = formatDistrictName(distParam);
 
   const inspectorRows: InspectorRow[] = [
     {
@@ -50,7 +83,7 @@ const InspektorDetail = () => {
     },
     {
       label: t("inspektorDetail.orgName", "TASHKILOT NOMI"),
-      value: t("inspektorDetail.orgVal", "Surxondaryo viloyati IIB Sho'rchi tumani IIB"),
+      value: `${regionName} IIB ${districtName} Probatsiya bo'linmasi`,
       isBlue: true,
     },
     {
@@ -60,12 +93,12 @@ const InspektorDetail = () => {
     },
     {
       label: t("inspektorDetail.region", "VILOYAT"),
-      value: t("inspektorDetail.regionVal", "Surxondaryo viloyati"),
+      value: regionName,
       isBlue: true,
     },
     {
       label: t("inspektorDetail.district", "TUMAN"),
-      value: t("inspektorDetail.districtVal", "Sho'rchi tumani"),
+      value: districtName,
       isBlue: false,
     },
     {
@@ -82,7 +115,6 @@ const InspektorDetail = () => {
 
   return (
     <div className={styles.container}>
-      {/* 5.1.JPG Header */}
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           <button
@@ -111,10 +143,8 @@ const InspektorDetail = () => {
         </div>
       </header>
 
-      {/* 5.1.JPG Asosiy karta */}
       <main className={styles.mainWrapper}>
         <div className={styles.whiteCard}>
-          {/* Chapdagi inspektor portreti */}
           <div className={styles.portraitContainer}>
             <img
               src={probatsiyaInsImg}
@@ -123,7 +153,6 @@ const InspektorDetail = () => {
             />
           </div>
 
-          {/* O'ngdagi ma'lumotlar ro'yxati (5.1.JPG Zebra kapsulalar) */}
           <div className={styles.infoContainer}>
             <h2 className={styles.sectionTitle}>INSPEKTORLAR</h2>
 
