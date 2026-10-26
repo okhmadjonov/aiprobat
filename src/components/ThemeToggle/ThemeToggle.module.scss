@@ -1,0 +1,70 @@
+@use "@/styles/breakpoints" as *;
+
+.themeToggleContainer {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  padding: 3px 4px;
+  gap: 3px;
+  user-select: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.25s ease;
+
+  :global([data-theme="light"]) & {
+    background: rgba(12, 43, 92, 0.07);
+  }
+
+  @include respond-to(xs) {
+    padding: 2px 3px;
+    gap: 2px;
+  }
+}
+
+.toggleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  :global([data-theme="light"]) & {
+    color: rgba(12, 43, 92, 0.55);
+  }
+
+  &:hover {
+    color: #ffffff;
+    :global([data-theme="light"]) & {
+      color: #0c2b5c;
+    }
+  }
+
+  &.active {
+    background: #ffffff;
+    color: #0c2b5c;
+
+    :global([data-theme="light"]) & {
+      background: #0c2b5c;
+      color: #ffffff;
+    }
+  }
+
+  @include respond-to(xs) {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.themeIcon {
+  display: block;
+  flex-shrink: 0;
+}

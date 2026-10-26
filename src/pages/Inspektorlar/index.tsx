@@ -1,8 +1,8 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Home, Search } from "lucide-react";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { Search } from "lucide-react";
+import Layout from "@/components/Layout";
 import UzbMap from "@/components/UzbMap";
 import regionDistrictsDataRaw from "@/constants/regionDistrictsSvg.json";
 import probatsiyaInsImg from "@/assets/global/probatsiyains.png";
@@ -12,21 +12,21 @@ const UsersMenuSvg = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M16 21V19C16 16.79 14.21 15 12 15H5C2.79 15 1 16.79 1 19V21"
-      stroke="#113F77"
+      stroke="currentColor"
       strokeWidth="2.2"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <circle cx="8.5" cy="7" r="4" stroke="#113F77" strokeWidth="2.2" />
+    <circle cx="8.5" cy="7" r="4" stroke="currentColor" strokeWidth="2.2" />
     <path
       d="M20 8C21.66 8 23 9.34 23 11C23 12.66 21.66 14 20 14"
-      stroke="#113F77"
+      stroke="currentColor"
       strokeWidth="2.2"
       strokeLinecap="round"
     />
     <path
       d="M4 8C2.34 8 1 9.34 1 11C1 12.66 2.34 14 4 14"
-      stroke="#113F77"
+      stroke="currentColor"
       strokeWidth="2.2"
       strokeLinecap="round"
     />
@@ -37,13 +37,13 @@ const FilesMenuSvg = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M15.5 2H8.5C7.4 2 6.5 2.9 6.5 4V17C6.5 18.1 7.4 19 8.5 19H17.5C18.6 19 19.5 18.1 19.5 17V6L15.5 2Z"
-      stroke="#113F77"
+      stroke="currentColor"
       strokeWidth="2.2"
       strokeLinejoin="round"
     />
     <path
       d="M4.5 7H3.5C2.4 7 1.5 7.9 1.5 9V20C1.5 21.1 2.4 22 3.5 22H14.5C15.6 22 16.5 21.1 16.5 20V19"
-      stroke="#113F77"
+      stroke="currentColor"
       strokeWidth="2.2"
       strokeLinecap="round"
     />
@@ -52,8 +52,8 @@ const FilesMenuSvg = () => (
 
 const ChartMenuSvg = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="2" y="3" width="20" height="18" rx="4" stroke="#113F77" strokeWidth="2.2" />
-    <path d="M7 16V12M12 16V8M17 16V10" stroke="#113F77" strokeWidth="2.5" strokeLinecap="round" />
+    <rect x="2" y="3" width="20" height="18" rx="4" stroke="currentColor" strokeWidth="2.2" />
+    <path d="M7 16V12M12 16V8M17 16V10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
   </svg>
 );
 
@@ -61,21 +61,21 @@ const ReportMenuSvg = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z"
-      stroke="#113F77"
+      stroke="currentColor"
       strokeWidth="2.2"
       strokeLinejoin="round"
     />
-    <path d="M14 2V8H20" stroke="#113F77" strokeWidth="2.2" strokeLinejoin="round" />
-    <path d="M9 13H15M9 17H13" stroke="#113F77" strokeWidth="2.2" strokeLinecap="round" />
+    <path d="M14 2V8H20" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round" />
+    <path d="M9 13H15M9 17H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
   </svg>
 );
 
 const SettingsMenuSvg = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="12" cy="12" r="3.2" stroke="#113F77" strokeWidth="2.2" />
+    <circle cx="12" cy="12" r="3.2" stroke="currentColor" strokeWidth="2.2" />
     <path
       d="M19.4 15A1.65 1.65 0 0 0 19.73 16.82L20.06 17.15A2 2 0 1 1 17.23 19.98L16.9 19.65A1.65 1.65 0 0 0 15.08 19.32A1.65 1.65 0 0 0 14 20.87V21.5A2 2 0 1 1 10 21.5V20.87A1.65 1.65 0 0 0 8.92 19.32A1.65 1.65 0 0 0 7.1 19.65L6.77 19.98A2 2 0 1 1 3.94 17.15L4.27 16.82A1.65 1.65 0 0 0 4.6 15A1.65 1.65 0 0 0 3.05 13.92H2.5A2 2 0 1 1 2.5 9.92H3.05A1.65 1.65 0 0 0 4.6 8.84A1.65 1.65 0 0 0 4.27 7.02L3.94 6.69A2 2 0 1 1 6.77 3.86L7.1 4.19A1.65 1.65 0 0 0 8.92 4.52A1.65 1.65 0 0 0 10 2.97V2.5A2 2 0 1 1 14 2.5V2.97A1.65 1.65 0 0 0 15.08 4.52A1.65 1.65 0 0 0 16.9 4.19L17.23 3.86A2 2 0 1 1 20.06 6.69L19.73 7.02A1.65 1.65 0 0 0 19.4 8.84A1.65 1.65 0 0 0 20.95 9.92H21.5A2 2 0 1 1 21.5 13.92H20.95A1.65 1.65 0 0 0 19.4 15Z"
-      stroke="#113F77"
+      stroke="currentColor"
       strokeWidth="2.2"
     />
   </svg>
@@ -84,8 +84,8 @@ const SettingsMenuSvg = () => (
 const CircleChevronDown = () => (
   <div className={styles.dropdownIconCircle}>
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="10" stroke="#0B2149" strokeWidth="2" />
-      <path d="M8 10L12 14L16 10" stroke="#0B2149" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+      <path d="M8 10L12 14L16 10" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   </div>
 );
@@ -174,57 +174,35 @@ const Inspektorlar = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <aside className={styles.sidebar}>
-        <div className={styles.sidebarTop}>
-          <button
-            className={styles.backBtn}
-            onClick={() => navigate("/dashboard")}
-            aria-label={t("common.back", "Orqaga")}
-          >
-            <span>{t("common.back", "Назад")}</span>
-            <div className={styles.backArrowCircle}>
-              <ArrowLeft size={16} strokeWidth={3} />
+    <Layout title={t("menu.inspektorlar", "PROBATSIYA INSPEKTORLARI HAQIDA")}>
+      <div className={styles.contentWrapper}>
+        <aside className={styles.sidebar}>
+          <div className={styles.sidebarTop}>
+            <div
+              className={styles.activeSectionCard}
+              onClick={() => setActiveTab("inspektorlar")}
+            >
+              {t("inspektorlar.title", "Probatsiya inspektorlari haqida")}
             </div>
-          </button>
 
-          <div
-            className={styles.activeSectionCard}
-            onClick={() => setActiveTab("inspektorlar")}
-          >
-            {t("inspektorlar.title", "Probatsiya inspektorlari haqida")}
+            <div className={styles.menuList}>
+              {menuItems.map((item) => (
+                <div
+                  key={item.id}
+                  className={`${styles.menuItem} ${
+                    activeTab === item.id ? styles.activeItem : ""
+                  }`}
+                  onClick={() => setActiveTab(item.id)}
+                >
+                  <div className={styles.menuIcon}>{item.icon}</div>
+                  <span>{item.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
+        </aside>
 
-          <div className={styles.menuList}>
-            {menuItems.map((item) => (
-              <div
-                key={item.id}
-                className={`${styles.menuItem} ${
-                  activeTab === item.id ? styles.activeItem : ""
-                }`}
-                onClick={() => setActiveTab(item.id)}
-              >
-                <div className={styles.menuIcon}>{item.icon}</div>
-                <span>{item.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <button
-          className={styles.homeCircleBtn}
-          onClick={() => navigate("/dashboard")}
-          aria-label={t("common.home", "Bosh sahifa")}
-        >
-          <Home size={22} strokeWidth={2.4} />
-        </button>
-      </aside>
-
-      <main className={styles.mainPanel}>
-        <div className={styles.headerRow}>
-          <h1 className={styles.goldTitle}>{t("menu.inspektorlar", "PROBATSIYA INSPEKTORLARI HAQIDA")}</h1>
-          <LanguageSwitcher variant="dark" />
-        </div>
+        <main className={styles.mainPanel}>
 
         {activeTab === "statistika" && (
           <div className={styles.tabContentPanel}>
@@ -425,7 +403,8 @@ const Inspektorlar = () => {
           </>
         )}
       </main>
-    </div>
+      </div>
+    </Layout>
   );
 };
 

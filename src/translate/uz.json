@@ -1,4 +1,8 @@
 {
+
+   "loader": {
+    "text": "Yuklanmoqda"
+  },
   "common": {
     "back": "Orqaga",
     "home": "Bosh sahifa",

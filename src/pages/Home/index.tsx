@@ -1,53 +1,109 @@
 import { useNavigate } from "react-router-dom";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
+import { ArrowRight, Check } from "lucide-react";
+import logoDocImg from "@/assets/logodoc.png";
 import inspectorImg from "@/assets/global/inspektor.png";
-import cloudImg from "@/assets/global/snow.png";
-import dayWidgetImg from "@/assets/global/day.png";
-import nightWidgetImg from "@/assets/global/night.png";
+import uzFlag from "@/assets/icons/uz-flag.webp";
+import ruFlag from "@/assets/icons/ru-flag.webp";
+import ThemeToggle from "@/components/ThemeToggle";
 import useCurrentDateTime from "@/hooks/useCurrentDateTime";
 import styles from "./Home.module.scss";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { timeStr, dateStr, isDay } = useCurrentDateTime();
+  const { i18n } = useTranslation();
+  const { timeStr, dateStr } = useCurrentDateTime();
+
+  const isRu = (i18n.language || "uz").toLowerCase().startsWith("ru");
+  const currentLang = isRu ? "ru" : "uz";
+
+  const handleSelectLang = (lang: "uz" | "ru", e: React.MouseEvent) => {
+    e.stopPropagation();
+    i18n.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
+  };
 
   const handleStart = () => {
     navigate("/dashboard");
   };
 
-  const widgetImg = isDay ? dayWidgetImg : nightWidgetImg;
-  const widgetAlt = isDay ? "Kunduzgi vidjet" : "Tungi vidjet";
-
   return (
-    <div className={styles.container} onClick={handleStart}>
-      <div className={styles.langWrapper} onClick={(e) => e.stopPropagation()}>
-        <LanguageSwitcher />
-      </div>
-
-      <div className={styles.topRightWidget} onClick={(e) => e.stopPropagation()}>
-        <img
-          src={widgetImg}
-          alt={widgetAlt}
-          className={styles.widgetImage}
-        />
-        <div className={styles.widgetDateTime}>
-          <div className={styles.widgetTime}>{timeStr}</div>
-          <div className={styles.widgetDate}>{dateStr}</div>
+    <div className={styles.container}>
+      <header className={styles.topHeader}>
+        <div className={styles.headerRightGroup}>
+          <ThemeToggle />
+          <div className={styles.dateTimeCol}>
+            <div className={styles.widgetTime}>{timeStr}</div>
+            <div className={styles.widgetDate}>{dateStr}</div>
+          </div>
         </div>
-      </div>
+      </header>
 
       <main className={styles.centerContent}>
-        <img
-          src={inspectorImg}
-          alt="Probatsiya inspektori"
-          className={styles.inspector}
-        />
-      </main>
+        <div className={styles.inspectorWrapper}>
+          {/* Orqa fondagi IIV gerbi watermarki - markazi aynan logo bilan ustma-ust */}
+          <div className={styles.bgEmblemWatermark} aria-hidden="true">
+            <img src={logoDocImg} alt="" className={styles.watermarkLogo} />
+          </div>
 
-      <footer className={styles.weatherCard} onClick={(e) => e.stopPropagation()}>
-        <img src={cloudImg} alt="Qorli ob-havo" className={styles.cloudIcon} />
-        <span className={styles.tempText}>-20°C</span>
-      </footer>
+          <img
+            src={inspectorImg}
+            alt="Probatsiya inspektori"
+            className={styles.inspector}
+            onClick={handleStart}
+          />
+        </div>
+
+        <div className={styles.actionsRow}>
+          <button
+            type="button"
+            className={`${styles.actionBtn} ${styles.langBtn} ${
+              currentLang === "uz" ? styles.activeLangBtn : ""
+            }`}
+            onClick={(e) => handleSelectLang("uz", e)}
+            aria-label="O'zbek tili"
+          >
+            <img src={uzFlag} alt="" className={styles.flagIcon} />
+            <span>O'zbekcha</span>
+            {currentLang === "uz" && (
+              <span className={styles.checkCircle}>
+                <Check size={13} strokeWidth={3.5} />
+              </span>
+            )}
+          </button>
+
+          <button
+            type="button"
+            className={`${styles.actionBtn} ${styles.langBtn} ${
+              currentLang === "ru" ? styles.activeLangBtn : ""
+            }`}
+            onClick={(e) => handleSelectLang("ru", e)}
+            aria-label="Русский язык"
+          >
+            <img src={ruFlag} alt="" className={styles.flagIcon} />
+            <span>Русский</span>
+            {currentLang === "ru" && (
+              <span className={styles.checkCircle}>
+                <Check size={13} strokeWidth={3.5} />
+              </span>
+            )}
+          </button>
+
+          <button
+            type="button"
+            className={`${styles.actionBtn} ${styles.startBtn}`}
+            onClick={handleStart}
+            aria-label={isRu ? "Продолжать" : "Davom etish"}
+          >
+            <span>{isRu ? "Продолжать" : "Davom etish"}</span>
+            <ArrowRight
+              size={20}
+              strokeWidth={2.6}
+              className={styles.arrowIcon}
+            />
+          </button>
+        </div>
+      </main>
     </div>
   );
 };

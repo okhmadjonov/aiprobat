@@ -6,7 +6,7 @@
   justify-content: center;
   background-color: #ffffff;
   color: #113f77;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 0 18px;
   min-width: 68px;
@@ -16,23 +16,33 @@
   cursor: pointer;
   user-select: none;
   font-family: inherit;
-  box-shadow: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   outline: none;
+  transition: all 0.2s ease;
 
-  transition: none !important;
-  transform: none !important;
+  :global([data-theme="light"]) & {
+    background-color: #0c2b5c;
+    color: #ffffff;
+    border-color: rgba(12, 43, 92, 0.2);
+    box-shadow: 0 2px 8px rgba(12, 43, 92, 0.15);
+
+    &:hover {
+      background-color: #143d7d !important;
+      color: #ffffff !important;
+    }
+
+    &:active {
+      background-color: #081d40 !important;
+    }
+  }
 
   &:hover {
-    background-color: #ffffff !important;
-    color: #113f77 !important;
-    transform: none !important;
-    filter: none !important;
-    box-shadow: none !important;
+    background-color: #f8fafc;
+    color: #113f77;
   }
 
   &:active {
-    transform: none !important;
-    background-color: #ffffff !important;
+    transform: scale(0.97);
   }
 
   &:focus {
@@ -42,6 +52,7 @@
   &.variantDark {
     background-color: #113f77;
     color: #ffffff;
+    border-color: rgba(17, 63, 119, 0.2);
 
     &:hover {
       background-color: #113f77 !important;

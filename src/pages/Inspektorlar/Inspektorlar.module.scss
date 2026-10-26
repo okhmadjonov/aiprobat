@@ -1,43 +1,51 @@
 @use "@/styles/breakpoints" as *;
 
-.container {
-  width: 100vw;
-  height: 100vh;
-  min-height: 100vh;
+.contentWrapper {
+  flex: 1;
   display: flex;
-  background-color: #0b2149;
-  user-select: none;
-  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
   box-sizing: border-box;
-  padding: 14px 18px;
-  gap: 16px;
+  padding: 0 clamp(18px, 2.5vw, 36px) clamp(16px, 2.2vh, 24px);
+  gap: clamp(14px, 1.8vw, 20px);
+  overflow: hidden;
 
   @include respond-to(xs) {
     flex-direction: column;
     overflow-y: auto;
-    padding: 10px;
+    padding: 12px;
+    gap: 12px;
   }
 }
 
 .sidebar {
-  width: 320px;
+  width: 300px;
+  height: 100%;
   flex-shrink: 0;
-  background: #ffffff;
+  background: #0b1f40;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
   border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 18px 18px 20px;
+  padding: 18px;
   box-sizing: border-box;
 
+  :global([data-theme="light"]) & {
+    background: #ffffff;
+    box-shadow: 0 12px 36px rgba(12, 43, 92, 0.1);
+    border: 1px solid #d0d7e2;
+  }
+
   @include respond-to(md) {
-    width: 280px;
+    width: 260px;
     padding: 14px;
   }
 
   @include respond-to(xs) {
     width: 100%;
+    height: auto;
     border-radius: 14px;
     padding: 12px;
   }
@@ -49,42 +57,8 @@
   gap: 14px;
 }
 
-.backBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: transparent;
-  border: none;
-  color: #0b2149;
-  padding: 4px 6px;
-  font-size: 17px;
-  font-weight: 800;
-  cursor: pointer;
-  width: fit-content;
-  transition: all 0.2s ease;
-
-  &:hover {
-    transform: translateX(-2px);
-  }
-
-  &:active {
-    transform: scale(0.96);
-  }
-}
-
-.backArrowCircle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: #0e3b79;
-  color: #ffffff;
-}
-
 .activeSectionCard {
-  background: #113f77;
+  background: #194574;
   color: #ffffff;
   border-radius: 10px;
   padding: 14px 12px;
@@ -92,7 +66,12 @@
   font-weight: 800;
   line-height: 1.25;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(17, 63, 119, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  :global([data-theme="light"]) & {
+    background: #113f77;
+    box-shadow: 0 4px 12px rgba(17, 63, 119, 0.35);
+  }
 }
 
 .menuList {
@@ -108,87 +87,83 @@
   gap: 12px;
   padding: 8px 10px;
   border-radius: 8px;
-  color: #0b2149;
+  color: #cbd5e1;
   font-size: 16px;
   font-weight: 800;
   cursor: pointer;
   transition: all 0.2s ease;
 
+  :global([data-theme="light"]) & {
+    color: #0b2149;
+  }
+
   &:hover {
-    background: #f1f5f9;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
     transform: translateX(3px);
+
+    :global([data-theme="light"]) & {
+      background: #f1f5f9;
+      color: #0b2149;
+    }
   }
 
   &.activeItem {
-    color: #113f77;
-    background: #eef4fc;
+    color: #ffffff;
+    background: #194574;
+
+    :global([data-theme="light"]) & {
+      color: #113f77;
+      background: #eef4fc;
+    }
   }
 }
 
 .menuIcon {
-  color: #113f77;
+  color: #cbd5e1;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-.homeCircleBtn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #0e3b79;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  margin-top: auto;
-  box-shadow: 0 4px 10px rgba(14, 59, 121, 0.35);
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: #0284c7;
-    transform: scale(1.06);
+  :global([data-theme="light"]) & {
+    color: #113f77;
   }
 
-  &:active {
-    transform: scale(0.95);
+  .activeItem & {
+    color: #ffffff;
+
+    :global([data-theme="light"]) & {
+      color: #113f77;
+    }
   }
 }
 
 .mainPanel {
   flex: 1;
-  background: #ffffff;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  // background: #0b1f40;
+  // box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
   border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
-  padding: 22px 28px 20px;
+  padding: 20px 26px 18px;
   box-sizing: border-box;
   overflow: hidden;
+
+  :global([data-theme="light"]) & {
+    background: #ffffff;
+    box-shadow: 0 12px 36px rgba(12, 43, 92, 0.1);
+    border: 1px solid #d0d7e2;
+  }
 
   @include respond-to(xs) {
     padding: 16px;
     border-radius: 14px;
+    height: auto;
   }
-}
-
-.headerRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.goldTitle {
-  font-size: 19px;
-  font-weight: 800;
-  color: #b28129;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  margin: 0;
 }
 
 .mapWrapper {
@@ -223,16 +198,26 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #ffffff;
-  border: 1px solid #d8e0eb;
+  background: #112a55;
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
   padding: 10px 14px;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+
+  :global([data-theme="light"]) & {
+    background: #f3f6fa;
+    border: 1.5px solid #cbd7e6;
+    box-shadow: 0 2px 6px rgba(12, 43, 92, 0.05);
+  }
 
   &:hover {
-    border-color: #0e3b79;
+    border-color: #38bdf8;
+
+    :global([data-theme="light"]) & {
+      border-color: #0284c7;
+    }
   }
 }
 
@@ -244,11 +229,25 @@
   font-family: inherit;
   font-size: 15px;
   font-weight: 800;
-  color: #0b2149;
+  color: #ffffff;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
   padding-right: 24px;
+
+  :global([data-theme="light"]) & {
+    color: #0b2149;
+  }
+
+  option {
+    background: #081a38;
+    color: #ffffff;
+
+    :global([data-theme="light"]) & {
+      background: #ffffff;
+      color: #0b2149;
+    }
+  }
 }
 
 .dropdownIconCircle {
@@ -258,18 +257,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0b2149;
+  color: #cbd5e1;
+
+  :global([data-theme="light"]) & {
+    color: #0b2149;
+  }
 }
 
 .searchBox {
   position: relative;
   display: flex;
   align-items: center;
-  background: #ffffff;
-  border: 1px solid #d8e0eb;
+  background: #112a55;
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
   padding: 10px 14px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+
+  :global([data-theme="light"]) & {
+    background: #f3f6fa;
+    border: 1.5px solid #cbd7e6;
+    box-shadow: 0 2px 6px rgba(12, 43, 92, 0.05);
+  }
 }
 
 .searchInput {
@@ -280,23 +289,34 @@
   font-family: inherit;
   font-size: 15px;
   font-weight: 600;
-  color: #0b2149;
+  color: #ffffff;
+
+  :global([data-theme="light"]) & {
+    color: #0b2149;
+  }
 
   &::placeholder {
-    color: #9aa8ba;
-    font-weight: 500;
+    color: #64748b;
+
+    :global([data-theme="light"]) & {
+      color: #9aa8ba;
+    }
   }
 }
 
 .searchIcon {
-  color: #0b2149;
+  color: #cbd5e1;
   flex-shrink: 0;
   cursor: pointer;
+
+  :global([data-theme="light"]) & {
+    color: #0b2149;
+  }
 }
 
 .inspectorDataBtn {
   width: 100%;
-  background: #0e3b79;
+  background: #194574;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -309,13 +329,23 @@
   font-size: 16px;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(14, 59, 121, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
   transition: all 0.2s ease;
 
+  :global([data-theme="light"]) & {
+    background: #0e3b79;
+    box-shadow: 0 4px 12px rgba(14, 59, 121, 0.35);
+  }
+
   &:hover {
-    background: #0c3368;
+    background: #1d4ed8;
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(14, 59, 121, 0.45);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+
+    :global([data-theme="light"]) & {
+      background: #0c3368;
+      box-shadow: 0 6px 16px rgba(14, 59, 121, 0.45);
+    }
   }
 
   &:active {
@@ -333,21 +363,32 @@
 
 .tabContentPanel {
   flex: 1;
-  background: #ffffff;
+  background: #081a38;
   border-radius: 16px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   overflow-y: auto;
+
+  :global([data-theme="light"]) & {
+    background: #ffffff;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
 }
 
 .panelTitle {
   font-size: 20px;
   font-weight: 800;
-  color: #0b2149;
+  color: #ffffff;
   margin: 0;
+
+  :global([data-theme="light"]) & {
+    color: #0b2149;
+  }
 }
 
 .statsGrid {
@@ -357,25 +398,40 @@
 }
 
 .statCard {
-  background: #f1f5f9;
+  background: #0d2246;
   border-radius: 12px;
   padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border-left: 5px solid #113f77;
+  border-left: 5px solid #dfa836;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  :global([data-theme="light"]) & {
+    background: #f1f5f9;
+    border-left: 5px solid #113f77;
+    border: none;
+  }
 }
 
 .statNumber {
   font-size: 28px;
   font-weight: 800;
-  color: #113f77;
+  color: #dfa836;
+
+  :global([data-theme="light"]) & {
+    color: #113f77;
+  }
 }
 
 .statLabel {
   font-size: 14px;
   font-weight: 600;
-  color: #475569;
+  color: #cbd5e1;
+
+  :global([data-theme="light"]) & {
+    color: #475569;
+  }
 }
 
 .toolsList {
@@ -385,26 +441,40 @@
 }
 
 .toolItem {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: #0d2246;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   padding: 14px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  :global([data-theme="light"]) & {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+  }
 }
 
 .toolTitle {
   font-size: 15px;
   font-weight: 700;
-  color: #0b2149;
+  color: #ffffff;
+
+  :global([data-theme="light"]) & {
+    color: #0b2149;
+  }
 }
 
 .toolStatus {
-  background: #dcfce7;
-  color: #166534;
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
   padding: 4px 10px;
   border-radius: 9999px;
   font-size: 12px;
   font-weight: 700;
+
+  :global([data-theme="light"]) & {
+    background: #dcfce7;
+    color: #166534;
+  }
 }

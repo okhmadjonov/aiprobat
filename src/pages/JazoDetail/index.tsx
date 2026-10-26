@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef, forwardRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import Header from "@/components/Layout/header";
 import HTMLFlipBook, { type PageFlipInstance } from "react-pageflip";
 import {
-  ArrowLeft,
   BookOpen,
   ChevronRight,
   ChevronLeft,
@@ -14,7 +13,6 @@ import {
 } from "lucide-react";
 import courtGavelImg from "@/assets/global/court_gavel.jpg";
 import silkRibbonImg from "@/assets/global/redbooksilk.png";
-import homeIconImg from "@/assets/global/uyicon.png";
 import cornerOrnamentImg from "@/assets/global/bookcorner.png";
 import goldScalesImg from "@/assets/global/booktoptitle.png";
 import styles from "./JazoDetail.module.scss";
@@ -169,29 +167,6 @@ const BookPage = forwardRef<HTMLDivElement, PageProps>(
 );
 BookPage.displayName = "BookPage";
 
-const LiveClock = () => {
-  const [dateTime, setDateTime] = useState("");
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, "0");
-      const minutes = String(now.getMinutes()).padStart(2, "0");
-      const day = String(now.getDate()).padStart(2, "0");
-      const month = String(now.getMonth() + 1).padStart(2, "0");
-      const year = now.getFullYear();
-      setDateTime(`${hours}:${minutes} ${day}.${month}.${year}`);
-    };
-    updateTime();
-    const timer = setInterval(updateTime, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  return (
-    <span className={styles.clockText}>{dateTime || "09:30 10.10.2026"}</span>
-  );
-};
-
 const JazoDetail = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -264,37 +239,10 @@ const JazoDetail = () => {
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <div className={styles.headerLeft}>
-          <button
-            className={styles.backBtn}
-            onClick={() => navigate("/jazo-turlari")}
-            aria-label={t("common.back", "Orqaga")}
-          >
-            <span>{t("common.back", "Назад")}</span>
-            <div className={styles.backArrowCircle}>
-              <ArrowLeft size={16} strokeWidth={3} />
-            </div>
-          </button>
-          <h1 className={styles.headerTitle}>{t("jazoTurlari.title", "JAZO TURLARI HAQIDA")}</h1>
-        </div>
-
-        <div className={styles.headerRight}>
-          <LiveClock />
-          <button
-            className={styles.homeIconBtn}
-            onClick={() => navigate("/dashboard")}
-            aria-label="Bosh sahifa"
-          >
-            <img
-              src={homeIconImg}
-              alt="Bosh sahifa"
-              className={styles.homeIconImg}
-            />
-          </button>
-          <LanguageSwitcher />
-        </div>
-      </header>
+      <Header
+        title={t("jazoTurlari.title", "JAZO TURLARI HAQIDA")}
+        onBack={() => navigate("/jazo-turlari")}
+      />
 
       <main className={styles.bookViewport}>
         <div className={styles.bookOuterFrame}>

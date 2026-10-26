@@ -1,24 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft } from "lucide-react";
-import dayWidgetImg from "@/assets/global/day.png";
-import nightWidgetImg from "@/assets/global/night.png";
+import Header from "@/components/Layout/header";
 import jazoImg from "@/assets/global/jazotur.png";
 import moddiyImg from "@/assets/global/birmarta.png";
 import inspektorImg from "@/assets/global/probatsiyains.png";
 import aiImg from "@/assets/global/aiyordam.png";
 import meyoriyImg from "@/assets/global/meyoriy.png";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
-import useCurrentDateTime from "@/hooks/useCurrentDateTime";
 import styles from "./Dashboard.module.scss";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { timeStr, dateStr, isDay } = useCurrentDateTime();
-
-  const widgetImg = isDay ? dayWidgetImg : nightWidgetImg;
-  const widgetAlt = isDay ? "Kunduzgi vidjet" : "Tungi vidjet";
 
   const menuItems = [
     {
@@ -60,32 +52,7 @@ const Dashboard = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.topBar}>
-        <button
-          className={styles.backButton}
-          onClick={() => navigate("/")}
-          aria-label={t("common.back", "Orqaga")}
-        >
-          <span>{t("common.back", "Назад")}</span>
-          <div className={styles.backArrowCircle}>
-            <ArrowLeft size={16} strokeWidth={3} />
-          </div>
-        </button>
-
-        <LanguageSwitcher />
-      </div>
-
-      <div className={styles.topRightWidget}>
-        <img
-          src={widgetImg}
-          alt={widgetAlt}
-          className={styles.widgetImage}
-        />
-        <div className={styles.widgetDateTime}>
-          <div className={styles.widgetTime}>{timeStr}</div>
-          <div className={styles.widgetDate}>{dateStr}</div>
-        </div>
-      </div>
+      <Header backPath="/" showHome={false} />
 
       <main className={styles.contentWrapper}>
         <div className={styles.headerCenter}>
@@ -116,12 +83,6 @@ const Dashboard = () => {
           ))}
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <span className={styles.welcomeText}>
-          {t("menu.welcome", "Asosiy menyuga xush kelibsiz")}
-        </span>
-      </footer>
     </div>
   );
 };

@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Home, Mic, Send } from "lucide-react";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import {  Mic, Send } from "lucide-react";
+import Header from "@/components/Layout/header";
 import airobotImg from "@/assets/global/airobot.png";
 import styles from "./AiYordamchi.module.scss";
 
@@ -27,7 +26,13 @@ const SparklesSvg = () => (
 );
 
 const ArrowRightSvg = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M5 12H19M19 12L13 6M19 12L13 18"
       stroke="white"
@@ -38,27 +43,6 @@ const ArrowRightSvg = () => (
   </svg>
 );
 
-const LiveClock = () => {
-  const [dateTime, setDateTime] = useState("");
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, "0");
-      const minutes = String(now.getMinutes()).padStart(2, "0");
-      const day = String(now.getDate()).padStart(2, "0");
-      const month = String(now.getMonth() + 1).padStart(2, "0");
-      const year = now.getFullYear();
-      setDateTime(`${hours}:${minutes} ${day}.${month}.${year}`);
-    };
-    updateTime();
-    const timer = setInterval(updateTime, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  return <span className={styles.clockText}>{dateTime || "09:30 10.10.2026"}</span>;
-};
-
 interface Message {
   id: string;
   sender: "user" | "bot";
@@ -67,22 +51,39 @@ interface Message {
 
 const getBotAnswer = (q: string, isRu: boolean): string => {
   const lower = q.toLowerCase();
-  if (lower.includes("nima") || lower.includes("tushuncha") || lower.includes("что такое")) {
+  if (
+    lower.includes("nima") ||
+    lower.includes("tushuncha") ||
+    lower.includes("что такое")
+  ) {
     return isRu
       ? "Пробация — это социально-правовой институт, осуществляющий контроль за исполнением наказаний, не связанных с лишением свободы, и оказывающий помощь в социальной адаптации осужденных."
       : "Probatsiya — bu sud tomonidan ozodlikdan mahrum qilish bilan bog'liq bo'lmagan jazolarga hukm qilingan shaxslarning xulq-atvori ustidan nazorat o'rnatish va ularning ijtimoiy moslashuviga ko'maklashish tizimidir.";
   }
-  if (lower.includes("axloq") || lower.includes("ati") || lower.includes("исправительн")) {
+  if (
+    lower.includes("axloq") ||
+    lower.includes("ati") ||
+    lower.includes("исправительн")
+  ) {
     return isRu
       ? "Исправительные работы назначаются на срок от 6 месяцев до 3 лет с удержанием от 10% до 30% заработной платы в доход государства по месту работы или в местах, определяемых органами пробации."
       : "Axloq tuzatish ishlari (ATI) — mahkumning ish haqidan davlat daromadiga 10% dan 30% gacha miqdorda ushlab qolingan holda, u o'z ish joyida yoki probatsiya organi belgilagan joylarda mehnat qilishi bilan o'taladi (muddati 6 oydan 3 yilgacha).";
   }
-  if (lower.includes("moddiy") || lower.includes("yordam") || lower.includes("помощ")) {
+  if (
+    lower.includes("moddiy") ||
+    lower.includes("yordam") ||
+    lower.includes("помощ")
+  ) {
     return isRu
       ? "Материальная помощь оказывается через территориальные органы пробации и центры 'Инсон'. Вы можете подать заявление на единовременную помощь, профессиональное обучение или трудоустройство."
       : "Moddiy yordam olish uchun probatsiya hisobida turgan shaxs o'z hududiy probatsiya inspektori yoki 'Inson' ijtimoiy xizmatlar markaziga ariza topshiradi. Bir martalik nafaqa, kasb-hunarga o'qitish va ish bilan ta'minlash choralari ko'riladi.";
   }
-  if (lower.includes("inspektor") || lower.includes("bog'lanish") || lower.includes("инспектор") || lower.includes("telefon")) {
+  if (
+    lower.includes("inspektor") ||
+    lower.includes("bog'lanish") ||
+    lower.includes("инспектор") ||
+    lower.includes("telefon")
+  ) {
     return isRu
       ? "Вы можете найти контакты и адреса районных отделов пробации в разделе 'Инспекторы' главного меню."
       : "O'z tumaningizdagi probatsiya xizmati xodimlari bilan bog'lanish uchun bosh menyudagi 'Inspektorlar' bo'limiga kiring va xaritadan o'z viloyatingiz hamda tumaningizni tanlang.";
@@ -93,7 +94,6 @@ const getBotAnswer = (q: string, isRu: boolean): string => {
 };
 
 const AiYordamchi = () => {
-  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
@@ -165,7 +165,8 @@ const AiYordamchi = () => {
       SpeechRecognition?: SpeechCtor;
       webkitSpeechRecognition?: SpeechCtor;
     };
-    const SpeechRecognition = win.SpeechRecognition || win.webkitSpeechRecognition;
+    const SpeechRecognition =
+      win.SpeechRecognition || win.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
       setQuestion(sampleQuestions[0]);
@@ -194,37 +195,10 @@ const AiYordamchi = () => {
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <div className={styles.headerLeft}>
-          <button
-            className={styles.backBtn}
-            onClick={() => navigate("/dashboard")}
-            aria-label={t("common.back", "Orqaga")}
-          >
-            <span>{t("common.back", "Назад")}</span>
-            <div className={styles.backArrowCircle}>
-              <ArrowLeft size={16} strokeWidth={3} />
-            </div>
-          </button>
-
-          <div className={styles.titleWrapper}>
-            <h1 className={styles.headerTitle}>{t("aiYordamchi.title", "AI YORDAMCHI")}</h1>
-            <SparklesSvg />
-          </div>
-        </div>
-
-        <div className={styles.headerRight}>
-          <LiveClock />
-          <button
-            className={styles.topHomeBtn}
-            onClick={() => navigate("/dashboard")}
-            aria-label={t("common.home", "Bosh sahifa")}
-          >
-            <Home size={20} strokeWidth={2.4} />
-          </button>
-          <LanguageSwitcher />
-        </div>
-      </header>
+      <Header
+        title={t("aiYordamchi.title", "AI YORDAMCHI")}
+        titleExtra={<SparklesSvg />}
+      />
 
       <main className={styles.mainWrapper}>
         <div className={styles.whiteCard}>
@@ -233,10 +207,15 @@ const AiYordamchi = () => {
               {messages.length === 0 ? (
                 <>
                   <h2 className={styles.promptText}>
-                    {t("aiYordamchi.prompt", "Probatsiyaga oid savollaringizni yozing yoki ovozli so'rashingiz mumkin.")}
+                    {t(
+                      "aiYordamchi.prompt",
+                      "Probatsiyaga oid savollaringizni yozing yoki ovozli so'rashingiz mumkin.",
+                    )}
                   </h2>
 
-                  <span className={styles.misolSavollarTitle}>{t("aiYordamchi.sampleTitle", "MISOL SAVOLLAR")}</span>
+                  <span className={styles.misolSavollarTitle}>
+                    {t("aiYordamchi.sampleTitle", "MISOL SAVOLLAR")}
+                  </span>
 
                   <div className={styles.questionsList}>
                     {sampleQuestions.map((text, idx) => (
@@ -287,7 +266,11 @@ const AiYordamchi = () => {
                     ))}
                     {isTyping && (
                       <div className={styles.typingIndicator}>
-                        <span>{isRu ? "ИИ печатает ответ..." : "AI javob tayyorlamoqda..."}</span>
+                        <span>
+                          {isRu
+                            ? "ИИ печатает ответ..."
+                            : "AI javob tayyorlamoqda..."}
+                        </span>
                       </div>
                     )}
                   </div>
@@ -316,7 +299,9 @@ const AiYordamchi = () => {
               className={styles.textInput}
               placeholder={
                 isListening
-                  ? isRu ? "Слушаю вас..." : "Sizni eshitmoqdaman..."
+                  ? isRu
+                    ? "Слушаю вас..."
+                    : "Sizni eshitmoqdaman..."
                   : t("aiYordamchi.placeholder", "Savolingizni yozing ...")
               }
               value={question}
@@ -347,14 +332,6 @@ const AiYordamchi = () => {
             </div>
           </div>
         </div>
-
-        <button
-          className={styles.bottomLeftHomeBtn}
-          onClick={() => navigate("/dashboard")}
-          aria-label={t("common.home", "Bosh sahifa")}
-        >
-          <Home size={22} strokeWidth={2.4} />
-        </button>
       </main>
     </div>
   );

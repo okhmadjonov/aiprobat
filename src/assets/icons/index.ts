@@ -1,4 +1,4 @@
-import uzFlag from "./uz-flag.svg";
-import ruFlag from "./ru-flag.svg";
+import uzFlag from "./uz-flag.webp";
+import ruFlag from "./ru-flag.webp";
 
 export { uzFlag, ruFlag };

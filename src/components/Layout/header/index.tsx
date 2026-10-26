@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Home } from "lucide-react";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { ArrowLeft, Home, Check } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
+import uzFlag from "@/assets/icons/uz-flag.webp";
+import ruFlag from "@/assets/icons/ru-flag.webp";
 import styles from "./Header.module.scss";
 
 export const LiveClock = () => {
@@ -35,6 +37,7 @@ export interface HeaderProps {
   showBack?: boolean;
   showHome?: boolean;
   showLang?: boolean;
+  showTheme?: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -46,9 +49,18 @@ const Header: React.FC<HeaderProps> = ({
   showBack = true,
   showHome = true,
   showLang = true,
+  showTheme = true,
 }) => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const isRu = (i18n.language || "uz").toLowerCase().startsWith("ru");
+  const currentLang = isRu ? "ru" : "uz";
+
+  const handleSelectLang = (lang: "uz" | "ru") => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
+  };
 
   const handleBackClick = () => {
     if (onBack) {
@@ -83,6 +95,46 @@ const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
+      {showLang && (
+        <div className={styles.headerCenter}>
+          <div className={styles.langPillsRow}>
+            <button
+              type="button"
+              className={`${styles.langPill} ${
+                currentLang === "uz" ? styles.activeLangPill : ""
+              }`}
+              onClick={() => handleSelectLang("uz")}
+              aria-label="O'zbek tili"
+            >
+              <img src={uzFlag} alt="" className={styles.flagIcon} />
+              <span>O'zbekcha</span>
+              {currentLang === "uz" && (
+                <span className={styles.checkCircle}>
+                  <Check size={12} strokeWidth={3.5} />
+                </span>
+              )}
+            </button>
+
+            <button
+              type="button"
+              className={`${styles.langPill} ${
+                currentLang === "ru" ? styles.activeLangPill : ""
+              }`}
+              onClick={() => handleSelectLang("ru")}
+              aria-label="Русский язык"
+            >
+              <img src={ruFlag} alt="" className={styles.flagIcon} />
+              <span>Русский</span>
+              {currentLang === "ru" && (
+                <span className={styles.checkCircle}>
+                  <Check size={12} strokeWidth={3.5} />
+                </span>
+              )}
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className={styles.headerRight}>
         <LiveClock />
 
@@ -97,7 +149,7 @@ const Header: React.FC<HeaderProps> = ({
           </button>
         )}
 
-        {showLang && <LanguageSwitcher />}
+        {showTheme && <ThemeToggle />}
       </div>
     </header>
   );

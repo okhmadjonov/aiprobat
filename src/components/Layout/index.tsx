@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header, { type HeaderProps } from "./header";
-import Sidebar, { type SidebarProps, type MenuItem } from "./sidebar";
+// import Sidebar, { type SidebarProps, type MenuItem } from "./sidebar";
 import styles from "./Layout.module.scss";
 
 export interface LayoutProps {
@@ -21,10 +21,10 @@ export interface LayoutProps {
   showSidebar?: boolean;
   sidebarActiveTitle?: string;
   onSidebarActiveTitleClick?: () => void;
-  sidebarItems?: MenuItem[];
+  // sidebarItems?: MenuItem[];
   sidebarActiveId?: string;
   onSidebarItemClick?: (id: string) => void;
-  sidebarProps?: Partial<SidebarProps>;
+  // sidebarProps?: Partial<SidebarProps>;
 
   className?: string;
   contentClassName?: string;
@@ -45,12 +45,12 @@ const Layout: React.FC<LayoutProps> = ({
   headerProps,
 
   showSidebar = false,
-  sidebarActiveTitle,
-  onSidebarActiveTitleClick,
-  sidebarItems,
-  sidebarActiveId,
-  onSidebarItemClick,
-  sidebarProps,
+  // sidebarActiveTitle,
+  // onSidebarActiveTitleClick,
+  // sidebarItems,
+  // sidebarActiveId,
+  // onSidebarItemClick,
+  // sidebarProps,
 
   className = "",
   contentClassName = "",
@@ -70,16 +70,16 @@ const Layout: React.FC<LayoutProps> = ({
     ...headerProps,
   };
 
-  const mergedSidebarProps: SidebarProps = {
-    activeTitle: sidebarActiveTitle,
-    onActiveTitleClick: onSidebarActiveTitleClick,
-    items: sidebarItems,
-    activeId: sidebarActiveId,
-    onItemClick: onSidebarItemClick,
-    onBack,
-    backPath,
-    ...sidebarProps,
-  };
+  // const mergedSidebarProps: SidebarProps = {
+  //   activeTitle: sidebarActiveTitle,
+  //   onActiveTitleClick: onSidebarActiveTitleClick,
+  //   // items: sidebarItems,
+  //   activeId: sidebarActiveId,
+  //   onItemClick: onSidebarItemClick,
+  //   onBack,
+  //   backPath,
+  //   // ...sidebarProps,
+  // };
 
   return (
     <div
@@ -88,7 +88,7 @@ const Layout: React.FC<LayoutProps> = ({
       } ${className}`.trim()}
       style={style}
     >
-      {showSidebar && <Sidebar {...mergedSidebarProps} />}
+      {/* {showSidebar && <Sidebar {...mergedSidebarProps} />} */}
 
       <div className={styles.mainArea}>
         {shouldRenderHeader && <Header {...mergedHeaderProps} />}
@@ -105,5 +105,5 @@ export default Layout;
 
 export { default as Header, LiveClock } from "./header";
 export type { HeaderProps } from "./header";
-export { default as Sidebar } from "./sidebar";
-export type { SidebarProps, MenuItem } from "./sidebar";
+// export { default as Sidebar } from "./sidebar";
+// export type { SidebarProps, MenuItem } from "./sidebar";

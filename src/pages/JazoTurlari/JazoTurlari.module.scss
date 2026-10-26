@@ -6,7 +6,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #0b2149;
+  background: transparent;
   user-select: none;
   overflow: hidden;
   padding: 0;
@@ -18,7 +18,8 @@
 
 .header {
   height: 72px;
-  background-color: #0b2149;
+  background-color: var(--color-header-bg);
+  border-bottom: 1px solid var(--color-header-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -55,6 +56,16 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: all 0.2s ease;
   overflow: visible;
+
+  :global([data-theme="light"]) & {
+    background: #0c2b5c;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(12, 43, 92, 0.2);
+
+    &:hover {
+      background: #143d7d;
+    }
+  }
 
   span {
     letter-spacing: 0.2px;
@@ -95,6 +106,12 @@
   box-sizing: border-box;
   flex-shrink: 0;
 
+  :global([data-theme="light"]) & {
+    background: #ffffff;
+    border: 3px solid #0c2b5c;
+    color: #0c2b5c;
+  }
+
   @include respond-to(xs) {
     width: 28px;
     height: 28px;
@@ -105,7 +122,7 @@
 .headerTitle {
   font-size: 20px;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--color-header-title);
   letter-spacing: 0.5px;
   margin: 0;
 
@@ -123,7 +140,7 @@
 .clockText {
   font-size: 15px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-header-title);
   font-variant-numeric: tabular-nums;
 
   @include respond-to(xs) {
@@ -200,14 +217,20 @@
   max-width: 1260px;
   height: 100%;
   max-height: 640px;
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  background: transparent;
+  border: none;
+  box-shadow: none;
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   gap: 12px;
+
+  :global([data-theme="light"]) & {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
 
   @include respond-to(xs) {
     max-height: none;
@@ -217,22 +240,34 @@
 }
 
 .itemCard {
-  background: #ffffff;
-  border: 1.5px solid #e2e8f0;
+  background: #112a55;
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
   border-radius: 14px;
   padding: 14px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
   transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
 
+  :global([data-theme="light"]) & {
+    background: #f3f6fa;
+    border: 1.5px solid #cbd7e6;
+    box-shadow: 0 3px 8px rgba(12, 43, 92, 0.06);
+  }
+
   &:hover {
-    border-color: #0284c7;
-    transform: translateX(6px);
-    box-shadow: 0 6px 18px rgba(2, 132, 199, 0.12);
-    background: #f8fafc;
+    border-color: #38bdf8;
+    background: #16376e;
+    transform: translateX(4px);
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.25);
+
+    :global([data-theme="light"]) & {
+      background: #e8f0fc;
+      border-color: #0284c7;
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.18);
+    }
   }
 
   &:active {
@@ -262,14 +297,22 @@
 }
 
 .goldCode {
-  color: #b5822f;
+  color: #fbbf24;
   font-weight: 900;
   letter-spacing: 0.5px;
+
+  :global([data-theme="light"]) & {
+    color: #b45309;
+  }
 }
 
 .navyName {
-  color: #0b2149;
+  color: #ffffff;
   font-weight: 800;
+
+  :global([data-theme="light"]) & {
+    color: #0c2b5c;
+  }
 }
 
 .arrowCircle {
@@ -279,13 +322,21 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #0b2149;
+  background: #1e4d8c;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   color: #ffffff;
   flex-shrink: 0;
   transition: transform 0.2s ease, background-color 0.2s ease;
 
+  :global([data-theme="light"]) & {
+    background: #0c2b5c;
+    border: none;
+    color: #ffffff;
+  }
+
   .itemCard:hover & {
     background: #0284c7;
+    border-color: #0284c7;
     transform: translateX(3px);
   }
 

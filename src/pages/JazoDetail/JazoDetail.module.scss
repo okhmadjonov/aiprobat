@@ -6,8 +6,8 @@
   width: 100vw;
   height: 100vh;
   min-height: 100vh;
-  background-color: #0b2149;
-  color: #ffffff;
+  background: transparent;
+  color: var(--color-text-primary);
   overflow: hidden;
   user-select: none;
 }
@@ -18,7 +18,8 @@
   justify-content: space-between;
   height: 68px;
   padding: 0 32px;
-  background-color: #0b2149;
+  background-color: var(--color-header-bg);
+  border-bottom: 1px solid var(--color-header-border);
   flex-shrink: 0;
 
   @include respond-to(xs) {
@@ -51,6 +52,16 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: all 0.2s ease;
   overflow: visible;
+
+  :global([data-theme="light"]) & {
+    background: #0c2b5c;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(12, 43, 92, 0.2);
+
+    &:hover {
+      background: #143d7d;
+    }
+  }
 
   span {
     letter-spacing: 0.2px;
@@ -91,6 +102,12 @@
   box-sizing: border-box;
   flex-shrink: 0;
 
+  :global([data-theme="light"]) & {
+    background: #ffffff;
+    border: 3px solid #0c2b5c;
+    color: #0c2b5c;
+  }
+
   @include respond-to(xs) {
     width: 28px;
     height: 28px;
@@ -101,7 +118,7 @@
 .headerTitle {
   font-size: 20px;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--color-header-title);
   letter-spacing: 0.5px;
   margin: 0;
 
@@ -119,7 +136,7 @@
 .clockText {
   font-size: 15px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-header-title);
   font-variant-numeric: tabular-nums;
 
   @include respond-to(xs) {
@@ -359,10 +376,10 @@
   justify-content: space-between;
   padding: 10px 16px;
   background: #ffffff;
-  border: 1.5px solid #e2e8f0;
+  border: 1.5px solid #cbd7e6;
   border-radius: 10px;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 3px 8px rgba(12, 43, 92, 0.08);
   transition: all 0.2s ease;
   width: 100%;
   box-sizing: border-box;
@@ -374,15 +391,16 @@
   outline: none;
 
   &:hover {
-    border-color: #38bdf8;
-    background: #f0f9ff;
+    border-color: #0284c7;
+    background: #f0f7ff;
     transform: translateX(4px);
+    box-shadow: 0 6px 14px rgba(2, 132, 199, 0.16);
   }
 
   &.activeItem {
     background: #eef6ff;
     border: 1.5px solid #0284c7;
-    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.16);
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.2);
   }
 }
 
@@ -564,10 +582,10 @@
   transform: translateY(-50%);
   width: 44px;
   height: 44px;
-  background: #0b2149;
+  background: #194574;
   border: 2px solid #ffffff;
   border-radius: 50%;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -575,6 +593,11 @@
   cursor: pointer;
   transition: all 0.2s ease;
   z-index: 35;
+
+  :global([data-theme="light"]) & {
+    background: #0c2b5c;
+    box-shadow: 0 6px 18px rgba(12, 43, 92, 0.3);
+  }
 
   &:hover {
     background: #0284c7;
@@ -596,8 +619,13 @@
   justify-content: space-between;
   height: 58px;
   padding: 0 32px;
-  background-color: #0b2149;
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
+
+  :global([data-theme="light"]) & {
+    border-top: 1px solid rgba(12, 43, 92, 0.08);
+  }
 
   @include respond-to(xs) {
     padding: 0 16px;
@@ -618,6 +646,16 @@
   color: #ffffff;
   cursor: pointer;
   transition: all 0.2s ease;
+
+  :global([data-theme="light"]) & {
+    background: #0c2b5c;
+    color: #ffffff;
+    border-color: #0c2b5c;
+
+    &:hover {
+      background: #143d7d;
+    }
+  }
 
   &:hover {
     background: rgba(255, 255, 255, 0.22);
@@ -647,6 +685,17 @@
   cursor: pointer;
   transition: all 0.2s ease;
 
+  :global([data-theme="light"]) & {
+    background: rgba(12, 43, 92, 0.08);
+    border-color: rgba(12, 43, 92, 0.18);
+    color: #0c2b5c;
+
+    &:hover:not(:disabled) {
+      background: #0284c7;
+      color: #ffffff;
+    }
+  }
+
   &:hover:not(:disabled) {
     background: #0284c7;
     border-color: #0284c7;
@@ -662,7 +711,7 @@
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 2px;
-  color: #ffffff;
+  color: var(--color-header-title);
   font-variant-numeric: tabular-nums;
 }
 
@@ -679,6 +728,16 @@
   color: #ffffff;
   cursor: pointer;
   transition: all 0.2s ease;
+
+  :global([data-theme="light"]) & {
+    background: #0c2b5c;
+    color: #ffffff;
+    border-color: #0c2b5c;
+
+    &:hover {
+      background: #143d7d;
+    }
+  }
 
   &:hover {
     background: rgba(255, 255, 255, 0.22);

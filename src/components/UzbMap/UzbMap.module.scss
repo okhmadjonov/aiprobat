@@ -9,7 +9,6 @@
   align-items: center;
   justify-content: center;
   user-select: none;
-
 }
 
 .backToUzbBtn {
@@ -20,26 +19,39 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #ffffff;
-  border: 1.5px solid #dbe3ee;
-  color: #0e3b79;
+  background: #081a38;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
   padding: 6px 16px 6px 10px;
   border-radius: 9999px;
   font-size: 13.5px;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(14, 59, 121, 0.15);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
   transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+
+  :global([data-theme="light"]) & {
+    background: #ffffff;
+    border: 1.5px solid #dbe3ee;
+    color: #0e3b79;
+    box-shadow: 0 4px 14px rgba(14, 59, 121, 0.15);
+  }
 
   span {
     letter-spacing: 0.2px;
   }
 
   &:hover {
-    background: #f1f5f9;
-    border-color: #0e3b79;
+    background: #132a4e;
+    border-color: #3b82f6;
     transform: translateX(-2px);
-    box-shadow: 0 6px 18px rgba(14, 59, 121, 0.22);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+
+    :global([data-theme="light"]) & {
+      background: #f1f5f9;
+      border-color: #0e3b79;
+      box-shadow: 0 6px 18px rgba(14, 59, 121, 0.22);
+    }
   }
 
   &:active {
@@ -61,9 +73,14 @@
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: #0e3b79;
+  background: #194574;
   color: #ffffff;
   flex-shrink: 0;
+
+  :global([data-theme="light"]) & {
+    background: #0e3b79;
+    color: #ffffff;
+  }
 
   @include respond-to(xs) {
     width: 22px;
@@ -76,15 +93,21 @@
   top: 8px;
   right: 8px;
   z-index: 12;
-  background: rgba(17, 63, 119, 0.08);
-  border: 1px solid rgba(17, 63, 119, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 5px 14px;
   border-radius: 9999px;
   font-size: 13px;
   font-weight: 800;
-  color: #113f77;
+  color: #dfa836;
   letter-spacing: 0.3px;
   pointer-events: none;
+
+  :global([data-theme="light"]) & {
+    background: rgba(17, 63, 119, 0.08);
+    border: 1px solid rgba(17, 63, 119, 0.2);
+    color: #113f77;
+  }
 
   @include respond-to(xs) {
     display: none;
@@ -95,15 +118,20 @@
   width: 100%;
   height: 100%;
   max-height: 560px;
-  filter: drop-shadow(0 8px 24px rgba(17, 63, 119, 0.14));
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.25));
   overflow: visible;
   transition: transform 0.3s ease;
+
+  :global([data-theme="light"]) & {
+    filter: drop-shadow(0 8px 24px rgba(17, 63, 119, 0.14));
+  }
 }
 
 .regionPath {
   cursor: pointer;
-  stroke: #162c54;
-  stroke-width: 2px;
+  fill: #1a4279 !important;
+  stroke: #0a1f3c !important;
+  stroke-width: 2px !important;
   stroke-linejoin: round;
   stroke-linecap: round;
   transition:
@@ -114,19 +142,37 @@
     transform 0.2s ease;
   outline: none;
 
+  :global([data-theme="light"]) & {
+    fill: #b9cbe5 !important;
+    stroke: #0c2b5c !important;
+    stroke-width: 2px !important;
+  }
+
   &:hover {
-    fill: #3b66b2 !important;
-    stroke: #0a172e !important;
-    stroke-width: 2.4px !important;
-    filter: drop-shadow(0 4px 12px rgba(17, 63, 119, 0.35));
+    fill: #2563eb !important;
+    stroke: #60a5fa !important;
+    stroke-width: 2.6px !important;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+
+    :global([data-theme="light"]) & {
+      fill: #1d4ed8 !important;
+      stroke: #0c2b5c !important;
+      filter: drop-shadow(0 6px 14px rgba(17, 63, 119, 0.35));
+    }
   }
 }
 
 .selectedPath {
-  fill: #1f3e82 !important;
-  stroke: #0a172e !important;
-  stroke-width: 2.8px !important;
-  filter: drop-shadow(0 6px 14px rgba(15, 45, 96, 0.45));
+  fill: #38bdf8 !important;
+  stroke: #ffffff !important;
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 6px 16px rgba(56, 189, 248, 0.45));
+
+  :global([data-theme="light"]) & {
+    fill: #0c2b5c !important;
+    stroke: #ffffff !important;
+    filter: drop-shadow(0 6px 14px rgba(12, 43, 92, 0.45));
+  }
 }
 
 .tashkentCalloutGroup {
@@ -136,11 +182,19 @@
     filter 0.22s ease;
 
   &:hover {
-    filter: drop-shadow(0 8px 18px rgba(17, 63, 119, 0.28));
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
+
+    :global([data-theme="light"]) & {
+      filter: drop-shadow(0 8px 18px rgba(17, 63, 119, 0.28));
+    }
 
     .calloutCard {
-      stroke: #0e3b79;
+      stroke: #3b82f6;
       stroke-width: 2.2px;
+
+      :global([data-theme="light"]) & {
+        stroke: #0e3b79;
+      }
     }
 
     .calloutDistrictPath {
@@ -150,29 +204,48 @@
 
   &.selectedCallout {
     .calloutCard {
-      stroke: #1f3e82;
+      stroke: #60a5fa;
       stroke-width: 2.6px;
-      filter: drop-shadow(0 8px 20px rgba(31, 62, 130, 0.4));
+      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.45));
+
+      :global([data-theme="light"]) & {
+        stroke: #1f3e82;
+        filter: drop-shadow(0 8px 20px rgba(31, 62, 130, 0.4));
+      }
     }
     .calloutHeader {
-      fill: #1f3e82;
+      fill: #194574;
+
+      :global([data-theme="light"]) & {
+        fill: #1f3e82;
+      }
     }
   }
 }
 
 .calloutCard {
-  fill: #ffffff;
-  stroke: #162c54;
+  fill: #081a38;
+  stroke: #2563eb;
   stroke-width: 1.8px;
-  filter: drop-shadow(0 4px 12px rgba(17, 63, 119, 0.12));
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
   transition:
     stroke 0.2s ease,
     stroke-width 0.2s ease;
+
+  :global([data-theme="light"]) & {
+    fill: #ffffff;
+    stroke: #162c54;
+    filter: drop-shadow(0 4px 12px rgba(17, 63, 119, 0.12));
+  }
 }
 
 .calloutHeader {
-  fill: #113f77;
+  fill: #194574;
   transition: fill 0.2s ease;
+
+  :global([data-theme="light"]) & {
+    fill: #113f77;
+  }
 }
 
 .calloutTitle {
@@ -185,15 +258,27 @@
 
 .calloutPointerLine {
   pointer-events: none;
-  stroke: #162c54;
+  stroke: #3b82f6;
   stroke-width: 1.8px;
   stroke-dasharray: 4 3;
+
+  :global([data-theme="light"]) & {
+    stroke: #162c54;
+  }
 }
 
 .calloutDistrictPath {
+  fill: #1a4279 !important;
+  stroke: #0a1f3c !important;
+  stroke-width: 1.5px !important;
   transition:
     fill 0.2s ease,
     stroke 0.2s ease;
+
+  :global([data-theme="light"]) & {
+    fill: #b9cbe5 !important;
+    stroke: #0c2b5c !important;
+  }
 }
 
 .tooltipBox {
@@ -212,17 +297,23 @@
 }
 
 .tooltipBubble {
-  background: #ffffff;
+  background: #081a38;
   border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
   padding: 6px 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   position: relative;
-  border: 1px solid #dce4ee;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   white-space: nowrap;
+
+  :global([data-theme="light"]) & {
+    background: #ffffff;
+    border: 1px solid #dce4ee;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  }
 
   &::after {
     content: "";
@@ -234,25 +325,45 @@
     height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid #ffffff;
+    border-top: 6px solid #081a38;
+
+    :global([data-theme="light"]) & {
+      border-top-color: #ffffff;
+    }
   }
 }
 
 .tooltipCount {
   font-size: 15px;
   font-weight: 800;
-  color: #0b2149;
+  color: #dfa836;
   line-height: 1.2;
+
+  :global([data-theme="light"]) & {
+    color: #0b2149;
+  }
 }
 
 .tooltipTitle {
   font-size: 12px;
   font-weight: 700;
-  color: #64748b;
+  color: #cbd5e1;
   margin-top: 2px;
+
+  :global([data-theme="light"]) & {
+    color: #64748b;
+  }
 }
 
 .cursorPointerSvg {
   margin-top: 4px;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+
+  path {
+    fill: #ffffff;
+
+    :global([data-theme="light"]) & {
+      fill: #000000;
+    }
+  }
 }

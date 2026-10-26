@@ -6,7 +6,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #0b2149;
+  background: transparent;
   user-select: none;
   overflow: hidden;
   box-sizing: border-box;
@@ -18,7 +18,8 @@
 
 .header {
   height: 72px;
-  background-color: #0b2149;
+  background-color: var(--color-header-bg);
+  border-bottom: 1px solid var(--color-header-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -55,6 +56,16 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: all 0.2s ease;
   overflow: visible;
+
+  :global([data-theme="light"]) & {
+    background: #0c2b5c;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(12, 43, 92, 0.2);
+
+    &:hover {
+      background: #143d7d;
+    }
+  }
 
   span {
     letter-spacing: 0.2px;
@@ -95,6 +106,12 @@
   box-sizing: border-box;
   flex-shrink: 0;
 
+  :global([data-theme="light"]) & {
+    background: #ffffff;
+    border: 3px solid #0c2b5c;
+    color: #0c2b5c;
+  }
+
   @include respond-to(xs) {
     width: 28px;
     height: 28px;
@@ -105,7 +122,7 @@
 .headerTitle {
   font-size: 20px;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--color-header-title);
   letter-spacing: 0.5px;
   margin: 0;
   text-transform: uppercase;
@@ -124,7 +141,7 @@
 .clockText {
   font-size: 16px;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--color-header-title);
   font-variant-numeric: tabular-nums;
   margin-right: 4px;
 
@@ -140,12 +157,21 @@
   width: 38px;
   height: 38px;
   background: transparent;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--color-header-title);
   border-radius: 50%;
-  color: #ffffff;
+  color: var(--color-header-title);
   cursor: pointer;
   padding: 0;
   transition: all 0.2s ease;
+
+  :global([data-theme="light"]) & {
+    border-color: #0c2b5c;
+    color: #0c2b5c;
+
+    &:hover {
+      background: rgba(12, 43, 92, 0.08);
+    }
+  }
 
   &:hover {
     background: rgba(255, 255, 255, 0.15);
@@ -199,14 +225,20 @@
   max-width: 1260px;
   height: 100%;
   max-height: 640px;
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  background: transparent;
+  border: none;
+  box-shadow: none;
   padding: 22px 32px 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
+
+  :global([data-theme="light"]) & {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
 
   @include respond-to(md) {
     padding: 18px 22px 14px;
@@ -228,8 +260,8 @@
 }
 
 .docCard {
-  background: #ffffff;
-  border: 1px solid #e5eaf2;
+  background: #112a55;
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
   border-radius: 12px;
   padding: 8px 20px;
   height: 60px;
@@ -237,7 +269,7 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(11, 33, 73, 0.04);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
   transition: all 0.2s ease;
   width: 100%;
   box-sizing: border-box;
@@ -247,11 +279,23 @@
   -webkit-appearance: none;
   outline: none;
 
+  :global([data-theme="light"]) & {
+    background: #f3f6fa;
+    border: 1.5px solid #cbd7e6;
+    box-shadow: 0 3px 8px rgba(12, 43, 92, 0.06);
+  }
+
   &:hover {
     transform: translateX(4px);
-    box-shadow: 0 6px 16px rgba(11, 33, 73, 0.1);
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.25);
     border-color: #38bdf8;
-    background: #fafcff;
+    background: #16376e;
+
+    :global([data-theme="light"]) & {
+      background: #e8f0fc;
+      border-color: #0284c7;
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.18);
+    }
   }
 
   &:active {
@@ -278,13 +322,21 @@
   width: 44px;
   height: 44px;
   border-radius: 10px;
-  background-color: #113f77;
+  background-color: #1e4d8c;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 3px 8px rgba(17, 63, 119, 0.28);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+
+  :global([data-theme="light"]) & {
+    background-color: #0c2b5c;
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 3px 8px rgba(17, 63, 119, 0.28);
+  }
 
   @include respond-to(xs) {
     width: 36px;
@@ -295,8 +347,12 @@
 .docTitle {
   font-size: 21px;
   font-weight: 800;
-  color: #b58428;
+  color: #ffffff;
   letter-spacing: 0.3px;
+
+  :global([data-theme="light"]) & {
+    color: #0c2b5c;
+  }
 
   @include respond-to(xs) {
     font-size: 14px;
@@ -307,18 +363,27 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #113f77;
+  background-color: #1e4d8c;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   color: #ffffff;
-  box-shadow: 0 2px 6px rgba(17, 63, 119, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease, background-color 0.2s ease;
+
+  :global([data-theme="light"]) & {
+    background-color: #0c2b5c;
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(17, 63, 119, 0.25);
+  }
 
   .docCard:hover & {
     transform: translateX(3px);
     background-color: #0284c7;
+    border-color: #0284c7;
   }
 
   @include respond-to(xs) {
@@ -340,7 +405,7 @@
 }
 
 .actionBigBtn {
-  background: #0e3b79;
+  background: #194574;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -353,13 +418,18 @@
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(14, 59, 121, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
   transition: all 0.2s ease;
 
+  :global([data-theme="light"]) & {
+    background: #0c2b5c;
+    box-shadow: 0 4px 12px rgba(14, 59, 121, 0.35);
+  }
+
   &:hover {
-    background: #0b3267;
+    background: #0284c7;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(14, 59, 121, 0.45);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
   }
 
   &:active {
@@ -375,8 +445,8 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(11, 33, 73, 0.75);
-  backdrop-filter: blur(4px);
+  background: rgba(3, 14, 34, 0.8);
+  backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -385,24 +455,35 @@
 }
 
 .modalCard {
-  background: #ffffff;
+  background: #0d2246;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
   max-width: 800px;
   width: 100%;
   max-height: 85vh;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
   overflow: hidden;
+
+  :global([data-theme="light"]) & {
+    background: #ffffff;
+    border: 1px solid rgba(12, 43, 92, 0.1);
+    box-shadow: 0 24px 60px rgba(12, 43, 92, 0.2);
+  }
 }
 
 .modalHeader {
-  background: #0e3b79;
+  background: #194574;
   color: #ffffff;
   padding: 18px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  :global([data-theme="light"]) & {
+    background: #0c2b5c;
+  }
 }
 
 .modalDocTitle {
@@ -436,27 +517,43 @@
   overflow-y: auto;
   font-size: 15px;
   line-height: 1.6;
-  color: #1e293b;
+  color: #cbd5e1;
+
+  :global([data-theme="light"]) & {
+    color: #1e293b;
+  }
 }
 
 .docMeta {
-  background: #f1f5f9;
+  background: #081a38;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 12px 16px;
   border-radius: 8px;
   margin-bottom: 16px;
   font-size: 13px;
-  color: #475569;
+  color: #94a3b8;
   font-weight: 600;
+
+  :global([data-theme="light"]) & {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+  }
 }
 
 .modalFooter {
   padding: 16px 24px;
-  background: #f8fafc;
-  border-top: 1px solid #e2e8f0;
+  background: #081a38;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
+
+  :global([data-theme="light"]) & {
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+  }
 }
 
 .modalActionBtn {
@@ -473,8 +570,12 @@
 }
 
 .modalPrimaryBtn {
-  background: #0e3b79;
+  background: #194574;
   color: #ffffff;
+
+  :global([data-theme="light"]) & {
+    background: #0c2b5c;
+  }
 
   &:hover {
     background: #0284c7;
@@ -482,10 +583,19 @@
 }
 
 .modalSecondaryBtn {
-  background: #e2e8f0;
-  color: #0f172a;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+
+  :global([data-theme="light"]) & {
+    background: #e2e8f0;
+    color: #0f172a;
+
+    &:hover {
+      background: #cbd5e1;
+    }
+  }
 
   &:hover {
-    background: #cbd5e1;
+    background: rgba(255, 255, 255, 0.2);
   }
 }
