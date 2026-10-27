@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Home, Check } from "lucide-react";
+import { ArrowLeft,  Check } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 import uzFlag from "@/assets/icons/uz-flag.webp";
 import ruFlag from "@/assets/icons/ru-flag.webp";
@@ -47,15 +47,13 @@ const Header: React.FC<HeaderProps> = ({
   onBack,
   backPath = "/dashboard",
   showBack = true,
-  showHome = true,
   showLang = true,
   showTheme = true,
 }) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
-  const isRu = (i18n.language || "uz").toLowerCase().startsWith("ru");
-  const currentLang = isRu ? "ru" : "uz";
+  const currentLang = (i18n.language || "uz").toLowerCase().startsWith("ru") ? "ru" : "uz";
 
   const handleSelectLang = (lang: "uz" | "ru") => {
     i18n.changeLanguage(lang);
@@ -82,7 +80,7 @@ const Header: React.FC<HeaderProps> = ({
             onClick={handleBackClick}
             aria-label={t("common.back", "Orqaga")}
           >
-            <span>{t("common.back", "Назад")}</span>
+            <span>{t("common.back", "Orqaga")}</span>
             <div className={styles.backArrowCircle}>
               <ArrowLeft size={16} strokeWidth={3} />
             </div>
@@ -95,8 +93,8 @@ const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {showLang && (
-        <div className={styles.headerCenter}>
+      <div className={styles.headerRight}>
+        {showLang && (
           <div className={styles.langPillsRow}>
             <button
               type="button"
@@ -132,22 +130,11 @@ const Header: React.FC<HeaderProps> = ({
               )}
             </button>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className={styles.headerRight}>
         <LiveClock />
 
-        {showHome && (
-          <button
-            type="button"
-            className={styles.homeBtn}
-            onClick={() => navigate("/dashboard")}
-            aria-label={t("common.home", "Bosh sahifa")}
-          >
-            <Home size={20} strokeWidth={2.4} />
-          </button>
-        )}
+  
 
         {showTheme && <ThemeToggle />}
       </div>

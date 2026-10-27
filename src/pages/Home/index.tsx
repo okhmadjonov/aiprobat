@@ -11,11 +11,10 @@ import styles from "./Home.module.scss";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { timeStr, dateStr } = useCurrentDateTime();
 
-  const isRu = (i18n.language || "uz").toLowerCase().startsWith("ru");
-  const currentLang = isRu ? "ru" : "uz";
+  const currentLang = (i18n.language || "uz").toLowerCase().startsWith("ru") ? "ru" : "uz";
 
   const handleSelectLang = (lang: "uz" | "ru", e: React.MouseEvent) => {
     e.stopPropagation();
@@ -93,9 +92,9 @@ const Home = () => {
             type="button"
             className={`${styles.actionBtn} ${styles.startBtn}`}
             onClick={handleStart}
-            aria-label={isRu ? "Продолжать" : "Davom etish"}
+            aria-label={t("common.continue", "Davom etish")}
           >
-            <span>{isRu ? "Продолжать" : "Davom etish"}</span>
+            <span>{t("common.continue", "Davom etish")}</span>
             <ArrowRight
               size={20}
               strokeWidth={2.6}

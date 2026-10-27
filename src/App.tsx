@@ -8,9 +8,9 @@ function App() {
   return (
     <ErrorBoundary>
       <AnimatedBackground />
-      <>
+      <div style={{ position: "relative", zIndex: 1, minHeight: "100vh", display: "flex", flexDirection: "column" }}>
         <AppRoute />
-      </>
+      </div>
       <ToastContainer position="top-right" autoClose={5000} theme="dark" />
     </ErrorBoundary>
   );

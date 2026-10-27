@@ -1,29 +1,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import {  Mic, Send } from "lucide-react";
+import type { TFunction } from "i18next";
+import { Mic, Send } from "lucide-react";
 import Header from "@/components/Layout/header";
 import airobotImg from "@/assets/global/airobot.png";
 import styles from "./AiYordamchi.module.scss";
 
-const SparklesSvg = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className={styles.sparklesSvg}
-  >
-    <path
-      d="M10 2L11.5 7.5L17 9L11.5 10.5L10 16L8.5 10.5L3 9L8.5 7.5L10 2Z"
-      fill="white"
-    />
-    <path
-      d="M18 14L19 17L22 18L19 19L18 22L17 19L14 18L17 17L18 14Z"
-      fill="white"
-    />
-  </svg>
-);
 
 const ArrowRightSvg = () => (
   <svg
@@ -49,34 +31,28 @@ interface Message {
   text: string;
 }
 
-const getBotAnswer = (q: string, isRu: boolean): string => {
+const getBotAnswer = (q: string, t: TFunction): string => {
   const lower = q.toLowerCase();
   if (
     lower.includes("nima") ||
     lower.includes("tushuncha") ||
     lower.includes("что такое")
   ) {
-    return isRu
-      ? "Пробация — это социально-правовой институт, осуществляющий контроль за исполнением наказаний, не связанных с лишением свободы, и оказывающий помощь в социальной адаптации осужденных."
-      : "Probatsiya — bu sud tomonidan ozodlikdan mahrum qilish bilan bog'liq bo'lmagan jazolarga hukm qilingan shaxslarning xulq-atvori ustidan nazorat o'rnatish va ularning ijtimoiy moslashuviga ko'maklashish tizimidir.";
+    return t("aiYordamchi.answers.whatIs");
   }
   if (
     lower.includes("axloq") ||
     lower.includes("ati") ||
     lower.includes("исправительн")
   ) {
-    return isRu
-      ? "Исправительные работы назначаются на срок от 6 месяцев до 3 лет с удержанием от 10% до 30% заработной платы в доход государства по месту работы или в местах, определяемых органами пробации."
-      : "Axloq tuzatish ishlari (ATI) — mahkumning ish haqidan davlat daromadiga 10% dan 30% gacha miqdorda ushlab qolingan holda, u o'z ish joyida yoki probatsiya organi belgilagan joylarda mehnat qilishi bilan o'taladi (muddati 6 oydan 3 yilgacha).";
+    return t("aiYordamchi.answers.ati");
   }
   if (
     lower.includes("moddiy") ||
     lower.includes("yordam") ||
     lower.includes("помощ")
   ) {
-    return isRu
-      ? "Материальная помощь оказывается через территориальные органы пробации и центры 'Инсон'. Вы можете подать заявление на единовременную помощь, профессиональное обучение или трудоустройство."
-      : "Moddiy yordam olish uchun probatsiya hisobida turgan shaxs o'z hududiy probatsiya inspektori yoki 'Inson' ijtimoiy xizmatlar markaziga ariza topshiradi. Bir martalik nafaqa, kasb-hunarga o'qitish va ish bilan ta'minlash choralari ko'riladi.";
+    return t("aiYordamchi.answers.help");
   }
   if (
     lower.includes("inspektor") ||
@@ -84,23 +60,17 @@ const getBotAnswer = (q: string, isRu: boolean): string => {
     lower.includes("инспектор") ||
     lower.includes("telefon")
   ) {
-    return isRu
-      ? "Вы можете найти контакты и адреса районных отделов пробации в разделе 'Инспекторы' главного меню."
-      : "O'z tumaningizdagi probatsiya xizmati xodimlari bilan bog'lanish uchun bosh menyudagi 'Inspektorlar' bo'limiga kiring va xaritadan o'z viloyatingiz hamda tumaningizni tanlang.";
+    return t("aiYordamchi.answers.inspector");
   }
-  return isRu
-    ? "Ваш запрос принят. Для получения официальной консультации по вашему делу обратитесь к районному инспектору пробации или изучите раздел нормативно-правовых документов."
-    : "Savolingiz qabul qilindi. Ushbu masala bo'yicha batafsil huquqiy yordam olish uchun hududiy probatsiya noziringizga uchrashishingiz yoki tizimdagi 'Me'yoriy hujjatlar' bo'limidan foydalanishingiz mumkin.";
+  return t("aiYordamchi.answers.default");
 };
 
 const AiYordamchi = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [question, setQuestion] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [isListening, setIsListening] = useState(false);
-
-  const isRu = (i18n.language || "uz").toLowerCase().startsWith("ru");
 
   const sampleQuestions = [
     t("aiYordamchi.q1", "Probatsiya nima?"),
@@ -129,7 +99,7 @@ const AiYordamchi = () => {
     setIsTyping(true);
 
     setTimeout(() => {
-      const answer = getBotAnswer(trimmed, isRu);
+      const answer = getBotAnswer(trimmed, t);
       setMessages((prev) => [
         ...prev,
         {
@@ -175,7 +145,7 @@ const AiYordamchi = () => {
 
     try {
       const recognition = new SpeechRecognition();
-      recognition.lang = isRu ? "ru-RU" : "uz-UZ";
+      recognition.lang = t("aiYordamchi.speechLang", "uz-UZ");
       recognition.interimResults = false;
 
       recognition.onstart = () => setIsListening(true);
@@ -197,7 +167,6 @@ const AiYordamchi = () => {
     <div className={styles.container}>
       <Header
         title={t("aiYordamchi.title", "AI YORDAMCHI")}
-        titleExtra={<SparklesSvg />}
       />
 
       <main className={styles.mainWrapper}>
@@ -240,14 +209,14 @@ const AiYordamchi = () => {
                 <>
                   <div className={styles.chatHeaderRow}>
                     <span className={styles.misolSavollarTitle}>
-                      {isRu ? "ДИАЛОГ С ИИ" : "AI BILAN MULOQOT"}
+                      {t("aiYordamchi.chatTitle", "AI BILAN MULOQOT")}
                     </span>
                     <button
                       type="button"
                       className={styles.resetChatBtn}
                       onClick={() => setMessages([])}
                     >
-                      {isRu ? "Очистить" : "Tozalash"}
+                      {t("aiYordamchi.clear", "Tozalash")}
                     </button>
                   </div>
 
@@ -267,9 +236,7 @@ const AiYordamchi = () => {
                     {isTyping && (
                       <div className={styles.typingIndicator}>
                         <span>
-                          {isRu
-                            ? "ИИ печатает ответ..."
-                            : "AI javob tayyorlamoqda..."}
+                          {t("aiYordamchi.typing", "AI javob tayyorlamoqda...")}
                         </span>
                       </div>
                     )}
@@ -299,10 +266,8 @@ const AiYordamchi = () => {
               className={styles.textInput}
               placeholder={
                 isListening
-                  ? isRu
-                    ? "Слушаю вас..."
-                    : "Sizni eshitmoqdaman..."
-                  : t("aiYordamchi.placeholder", "Savolingizni yozing ...")
+                  ? t("aiYordamchi.listeningPrompt", "Sizni eshitmoqdaman...")
+                  : t("aiYordamchi.placeholder", "Savolingizni bu yerga yozing...")
               }
               value={question}
               onChange={(e) => setQuestion(e.target.value)}

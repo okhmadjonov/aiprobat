@@ -154,81 +154,35 @@
   }
 }
 
-.homeBtn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: clamp(34px, 2.8vw, 42px);
-  height: clamp(34px, 2.8vw, 42px);
-  background: transparent;
-  border: 2px solid var(--color-header-title);
-  border-radius: 50%;
-  color: var(--color-header-title);
-  cursor: pointer;
-  padding: 0;
-  transition: all 0.2s ease;
 
-  :global([data-theme="light"]) & {
-    border-color: #0c2b5c;
-    color: #0c2b5c;
 
-    &:hover {
-      background: rgba(12, 43, 92, 0.08);
-    }
-  }
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: scale(1.05);
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
-
-  @include respond-to(xs) {
-    width: 32px;
-    height: 32px;
-  }
-}
-
-.headerCenter {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+.headerRight {
   display: flex;
   align-items: center;
-  justify-content: center;
-  pointer-events: auto;
-  z-index: 10;
-
-  @include respond-to(xs) {
-    position: static;
-    transform: none;
-  }
+  gap: clamp(10px, 1.2vw, 16px);
 }
 
 .langPillsRow {
   display: flex;
   align-items: center;
-  gap: clamp(8px, 1vw, 12px);
+  gap: clamp(6px, 0.7vw, 10px);
   user-select: none;
 }
 
 .langPill {
-  height: clamp(36px, 4.8vh, 42px);
-  padding: 0 clamp(14px, 1.2vw, 18px) 0 clamp(8px, 0.8vw, 12px);
+  height: clamp(34px, 4.4vh, 38px);
+  padding: 0 clamp(12px, 1vw, 16px) 0 clamp(7px, 0.6vw, 10px);
   border-radius: 9999px;
   border: none;
   outline: none;
   background: rgba(255, 255, 255, 0.08);
   color: var(--color-text-secondary);
   font-family: inherit;
-  font-size: clamp(13px, 1.05vw, 15px);
+  font-size: clamp(12.5px, 0.95vw, 14px);
   font-weight: 700;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   cursor: pointer;
   transition: color 0.2s ease;
   user-select: none;
@@ -258,16 +212,16 @@
   }
 
   @include respond-to(xs) {
-    height: 32px;
-    padding: 0 10px 0 6px;
-    font-size: 12px;
-    gap: 6px;
+    height: 30px;
+    padding: 0 8px 0 5px;
+    font-size: 11.5px;
+    gap: 5px;
   }
 }
 
 .flagIcon {
-  width: clamp(20px, 1.7vw, 24px);
-  height: clamp(20px, 1.7vw, 24px);
+  width: clamp(18px, 1.5vw, 22px);
+  height: clamp(18px, 1.5vw, 22px);
   border-radius: 50%;
   object-fit: cover;
   border: none;
@@ -275,8 +229,8 @@
   flex-shrink: 0;
 
   @include respond-to(xs) {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -284,8 +238,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 17px;
-  height: 17px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: #16a34a;
   color: #ffffff;
@@ -294,8 +248,8 @@
   box-shadow: 0 2px 5px rgba(22, 163, 74, 0.35);
 
   @include respond-to(xs) {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
   }
 }
 

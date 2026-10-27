@@ -1,6 +1,5 @@
 {
-
-   "loader": {
+  "loader": {
     "text": "Yuklanmoqda"
   },
   "common": {
@@ -12,7 +11,8 @@
     "all": "Barchasi",
     "close": "Yopish",
     "voiceRead": "Ovozli o'qish",
-    "readMore": "Batafsil"
+    "readMore": "Batafsil",
+    "continue": "Davom etish"
   },
   "menu": {
     "title": "PROBATSIYA",
@@ -39,10 +39,32 @@
     "statistika": "Statistika",
     "hisobotlar": "Hisobotlar",
     "sozlamalar": "Sozlamalar",
+    "allCities": "Barcha shaharlar",
     "tashkentCity": "Toshkent shahri",
+    "samarkandCity": "Samarqand shahri",
+    "bukharaCity": "Buxoro shahri",
     "chooseDistrict": "Tumanni tanlang",
+    "searchPlaceholder": "Inspektor ism-familiyasini qidirish....",
+    "inspectorData": "Inspektor ma'lumotlari",
     "inspectorCount": "ta inspektor",
     "viewDetail": "Batafsil",
+    "regions": {
+      "all": "Viloyatlar kesimida (Barchasi)",
+      "toshkent_sh": "Toshkent shahri",
+      "toshkent_vil": "Toshkent viloyati",
+      "samarqand": "Samarqand viloyati",
+      "fargona": "Fargʻona viloyati",
+      "andijon": "Andijon viloyati",
+      "namangan": "Namangan viloyati",
+      "qashqadaryo": "Qashqadaryo viloyati",
+      "surxondaryo": "Surxondaryo viloyati",
+      "buxoro": "Buxoro viloyati",
+      "xorazm": "Xorazm viloyati",
+      "jizzax": "Jizzax viloyati",
+      "navoiy": "Navoiy viloyati",
+      "sirdaryo": "Sirdaryo viloyati",
+      "qoraqalpogiston": "Qoraqalpog‘iston respublikasi"
+    },
     "districts": {
       "olmazor": "Olmazor tumani",
       "yunusobod": "Yunusobod tumani",
@@ -94,6 +116,11 @@
     "title": "AI YORDAMCHI",
     "prompt": "Probatsiyaga oid savollaringizni yozing yoki ovozli so'rashingiz mumkin.",
     "sampleTitle": "MISOL SAVOLLAR",
+    "chatTitle": "AI BILAN MULOQOT",
+    "clear": "Tozalash",
+    "typing": "AI javob tayyorlamoqda...",
+    "listeningPrompt": "Sizni eshitmoqdaman...",
+    "speechLang": "uz-UZ",
     "q1": "Probatsiya nima?",
     "q2": "Axloq tuzatish ishlari qanday jazo ?",
     "q3": "Moddiy yordam qanday olinadi ?",
@@ -101,7 +128,14 @@
     "placeholder": "Savolingizni bu yerga yozing...",
     "send": "Yuborish",
     "listening": "Tinglanmoqda...",
-    "welcome": "Assalomu alaykum! Men probatsiya xizmati bo'yicha sun'iy intellekt yordamchisiman."
+    "welcome": "Assalomu alaykum! Men probatsiya xizmati bo'yicha sun'iy intellekt yordamchisiman.",
+    "answers": {
+      "whatIs": "Probatsiya — bu sud tomonidan ozodlikdan mahrum qilish bilan bog'liq bo'lmagan jazolarga hukm qilingan shaxslarning xulq-atvori ustidan nazorat o'rnatish va ularning ijtimoiy moslashuviga ko'maklashish tizimidir.",
+      "ati": "Axloq tuzatish ishlari (ATI) — mahkumning ish haqidan davlat daromadiga 10% dan 30% gacha miqdorda ushlab qolingan holda, u o'z ish joyida yoki probatsiya organi belgilagan joylarda mehnat qilishi bilan o'taladi (muddati 6 oydan 3 yilgacha).",
+      "help": "Moddiy yordam olish uchun probatsiya hisobida turgan shaxs o'z hududiy probatsiya inspektori yoki 'Inson' ijtimoiy xizmatlar markaziga ariza topshiradi. Bir martalik nafaqa, kasb-hunarga o'qitish va ish bilan ta'minlash choralari ko'riladi.",
+      "inspector": "O'z tumaningizdagi probatsiya xizmati xodimlari bilan bog'lanish uchun bosh menyudagi 'Inspektorlar' bo'limiga kiring va xaritadan o'z viloyatingiz hamda tumaningizni tanlang.",
+      "default": "Savolingiz qabul qilindi. Ushbu masala bo'yicha batafsil huquqiy yordam olish uchun hududiy probatsiya noziringizga uchrashishingiz yoki tizimdagi 'Me'yoriy hujjatlar' bo'limidan foydalanishingiz mumkin."
+    }
   },
   "jazoTurlari": {
     "title": "JAZO TURLARI HAQIDA",
@@ -110,10 +144,22 @@
     "mji": "MAJBURIY JAMOAT ISHLARI",
     "mxmq": "MUAYYAN HUQUQDAN MAHRUM QILISH",
     "shs": "SHARTLI HUKM QILISH",
-    "udo": "UZOQ MUDDATLI OZOD QILISH"
+    "udo": "UZOQ MUDDATLI OZOD QILISH",
+    "codes": {
+      "ati": "ATI —",
+      "och": "OCH —",
+      "mji": "MJI —",
+      "mxmq": "MXMQ —",
+      "shs": "SHS —",
+      "udo": "UDO —"
+    }
   },
   "jazoDetail": {
     "turnPage": "Varaqlash",
+    "mainInfo": "Asosiy ma'lumotlar",
+    "durationPrefix": "Muddati: ",
+    "locationPrefix": "Joyi: ",
+    "supervisorPrefix": "Nazorat: ",
     "duration": "Muddat",
     "location": "O'tash joyi",
     "supervisor": "Nazorat qiluvchi",

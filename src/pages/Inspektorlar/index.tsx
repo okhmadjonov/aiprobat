@@ -112,14 +112,12 @@ const regionDistrictsMap = regionDistrictsDataRaw as Record<
 
 const Inspektorlar = () => {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("haqida");
   const [city, setCity] = useState("all");
   const [selectedRegionId, setSelectedRegionId] = useState("");
   const [selectedDistrictId, setSelectedDistrictId] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-
-  const isRu = (i18n.language || "uz").toLowerCase().startsWith("ru");
 
   const menuItems = [
     { id: "inspektorlar", label: t("inspektorlar.inspektorlar", "Inspektorlar"), icon: <UsersMenuSvg /> },
@@ -130,21 +128,21 @@ const Inspektorlar = () => {
   ];
 
   const regionOptions = [
-    { id: "", uz: "Viloyatlar kesimida (Barchasi)", ru: "По областям (Все)" },
-    { id: "toshkent_sh", uz: "Toshkent shahri", ru: "город Ташкент" },
-    { id: "toshkent_vil", uz: "Toshkent viloyati", ru: "Ташкентская область" },
-    { id: "samarqand", uz: "Samarqand viloyati", ru: "Самаркандская область" },
-    { id: "fargona", uz: "Fargʻona viloyati", ru: "Ферганская область" },
-    { id: "andijon", uz: "Andijon viloyati", ru: "Андижанская область" },
-    { id: "namangan", uz: "Namangan viloyati", ru: "Наманганская область" },
-    { id: "qashqadaryo", uz: "Qashqadaryo viloyati", ru: "Кашкадарьинская область" },
-    { id: "surxondaryo", uz: "Surxondaryo viloyati", ru: "Сурхандарьинская область" },
-    { id: "buxoro", uz: "Buxoro viloyati", ru: "Бухарская область" },
-    { id: "xorazm", uz: "Xorazm viloyati", ru: "Хорезмская область" },
-    { id: "jizzax", uz: "Jizzax viloyati", ru: "Джизакская область" },
-    { id: "navoiy", uz: "Navoiy viloyati", ru: "Навоийская область" },
-    { id: "sirdaryo", uz: "Sirdaryo viloyati", ru: "Сырдарьинская область" },
-    { id: "qoraqalpogiston", uz: "Qoraqalpog‘iston respublikasi", ru: "Республика Каракалпакстан" },
+    { id: "", label: t("inspektorlar.regions.all", "Viloyatlar kesimida (Barchasi)") },
+    { id: "toshkent_sh", label: t("inspektorlar.regions.toshkent_sh", "Toshkent shahri") },
+    { id: "toshkent_vil", label: t("inspektorlar.regions.toshkent_vil", "Toshkent viloyati") },
+    { id: "samarqand", label: t("inspektorlar.regions.samarqand", "Samarqand viloyati") },
+    { id: "fargona", label: t("inspektorlar.regions.fargona", "Fargʻona viloyati") },
+    { id: "andijon", label: t("inspektorlar.regions.andijon", "Andijon viloyati") },
+    { id: "namangan", label: t("inspektorlar.regions.namangan", "Namangan viloyati") },
+    { id: "qashqadaryo", label: t("inspektorlar.regions.qashqadaryo", "Qashqadaryo viloyati") },
+    { id: "surxondaryo", label: t("inspektorlar.regions.surxondaryo", "Surxondaryo viloyati") },
+    { id: "buxoro", label: t("inspektorlar.regions.buxoro", "Buxoro viloyati") },
+    { id: "xorazm", label: t("inspektorlar.regions.xorazm", "Xorazm viloyati") },
+    { id: "jizzax", label: t("inspektorlar.regions.jizzax", "Jizzax viloyati") },
+    { id: "navoiy", label: t("inspektorlar.regions.navoiy", "Navoiy viloyati") },
+    { id: "sirdaryo", label: t("inspektorlar.regions.sirdaryo", "Sirdaryo viloyati") },
+    { id: "qoraqalpogiston", label: t("inspektorlar.regions.qoraqalpogiston", "Qoraqalpog‘iston respublikasi") },
   ];
 
   const currentDistrictsList = useMemo(() => {
@@ -178,12 +176,12 @@ const Inspektorlar = () => {
       <div className={styles.contentWrapper}>
         <aside className={styles.sidebar}>
           <div className={styles.sidebarTop}>
-            <div
+            {/* <div
               className={styles.activeSectionCard}
               onClick={() => setActiveTab("inspektorlar")}
             >
               {t("inspektorlar.title", "Probatsiya inspektorlari haqida")}
-            </div>
+            </div> */}
 
             <div className={styles.menuList}>
               {menuItems.map((item) => (
@@ -327,10 +325,10 @@ const Inspektorlar = () => {
                       setSelectedDistrictId("");
                     }}
                   >
-                    <option value="all">{isRu ? "Все города" : "Barcha shaharlar"}</option>
+                    <option value="all">{t("inspektorlar.allCities", "Barcha shaharlar")}</option>
                     <option value="toshkent">{t("inspektorlar.tashkentCity", "Toshkent shahri")}</option>
-                    <option value="samarqand">{isRu ? "город Самарканд" : "Samarqand shahri"}</option>
-                    <option value="buxoro">{isRu ? "город Бухара" : "Buxoro shahri"}</option>
+                    <option value="samarqand">{t("inspektorlar.samarkandCity", "Samarqand shahri")}</option>
+                    <option value="buxoro">{t("inspektorlar.bukharaCity", "Buxoro shahri")}</option>
                   </select>
                   <CircleChevronDown />
                 </div>
@@ -352,7 +350,7 @@ const Inspektorlar = () => {
                   >
                     {regionOptions.map((opt) => (
                       <option key={opt.id} value={opt.id}>
-                        {isRu ? opt.ru : opt.uz}
+                        {opt.label}
                       </option>
                     ))}
                   </select>
@@ -365,7 +363,7 @@ const Inspektorlar = () => {
                     value={selectedDistrictId}
                     onChange={(e) => setSelectedDistrictId(e.target.value)}
                   >
-                    <option value="">{isRu ? "Выберите район" : "Tumanni tanlang"}</option>
+                    <option value="">{t("inspektorlar.chooseDistrict", "Tumanni tanlang")}</option>
                     {filteredDistrictsList.map((item) => (
                       <option key={item.id} value={item.id}>
                         {item.name}
@@ -380,7 +378,7 @@ const Inspektorlar = () => {
                 <input
                   type="text"
                   className={styles.searchInput}
-                  placeholder={isRu ? "Поиск инспектора по ФИО...." : "Inspektor ism-familiyasini qidirish...."}
+                  placeholder={t("inspektorlar.searchPlaceholder", "Inspektor ism-familiyasini qidirish....")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -397,7 +395,7 @@ const Inspektorlar = () => {
                   alt="Probatsiya inspektori"
                   className={styles.inspectorBtnIcon}
                 />
-                <span>{isRu ? "Данные инспектора" : "Inspektor ma'lumotlari"}</span>
+                <span>{t("inspektorlar.inspectorData", "Inspektor ma'lumotlari")}</span>
               </button>
             </div>
           </>

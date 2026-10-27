@@ -6,17 +6,15 @@ import styles from "./JazoTurlari.module.scss";
 
 const JazoTurlari = () => {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
-
-  const isRu = (i18n.language || "uz").toLowerCase().startsWith("ru");
+  const { t } = useTranslation();
 
   const jazoItems = [
-    { id: "ati", code: isRu ? "ИТР —" : "ATI —", name: t("jazoTurlari.ati", "AXLOQ TUZATISH ISHLARI") },
-    { id: "och", code: isRu ? "ОС —" : "OCH —", name: t("jazoTurlari.och", "OZODLIKNI CHEKLASH") },
-    { id: "mji", code: isRu ? "ООР —" : "MJI —", name: t("jazoTurlari.mji", "MAJBURIY JAMOAT ISHLARI") },
-    { id: "mxmq", code: isRu ? "ЛОП —" : "MXMQ —", name: t("jazoTurlari.mxmq", "MUAYYAN HUQUQDAN MAHRUM QILISH") },
-    { id: "shs", code: isRu ? "УО —" : "SHS —", name: t("jazoTurlari.shs", "SHARTLI HUKM QILISH") },
-    { id: "udo", code: isRu ? "УДО —" : "UDO —", name: t("jazoTurlari.udo", "UZOQ MUDDATLI OZOD QILISH") },
+    { id: "ati", code: t("jazoTurlari.codes.ati", "ATI —"), name: t("jazoTurlari.ati", "AXLOQ TUZATISH ISHLARI") },
+    { id: "och", code: t("jazoTurlari.codes.och", "OCH —"), name: t("jazoTurlari.och", "OZODLIKNI CHEKLASH") },
+    { id: "mji", code: t("jazoTurlari.codes.mji", "MJI —"), name: t("jazoTurlari.mji", "MAJBURIY JAMOAT ISHLARI") },
+    { id: "mxmq", code: t("jazoTurlari.codes.mxmq", "MXMQ —"), name: t("jazoTurlari.mxmq", "MUAYYAN HUQUQDAN MAHRUM QILISH") },
+    { id: "shs", code: t("jazoTurlari.codes.shs", "SHS —"), name: t("jazoTurlari.shs", "SHARTLI HUKM QILISH") },
+    { id: "udo", code: t("jazoTurlari.codes.udo", "UDO —"), name: t("jazoTurlari.udo", "UZOQ MUDDATLI OZOD QILISH") },
   ];
 
   return (

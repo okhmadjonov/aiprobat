@@ -1,6 +1,8 @@
 @use "@/styles/breakpoints" as *;
 
 .container {
+  position: relative;
+  z-index: 1;
   width: 100vw;
   height: 100vh;
   min-height: 100vh;
@@ -434,15 +436,11 @@
   }
 
   &:hover {
-    border-color: #38bdf8;
     background: #16376e;
     transform: translateX(3px);
-    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.25);
 
     :global([data-theme="light"]) & {
       background: #e8f0fc;
-      border-color: #0284c7;
-      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.18);
     }
   }
 

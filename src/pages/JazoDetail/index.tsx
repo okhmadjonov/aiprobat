@@ -30,12 +30,12 @@ interface JazoItem {
   supervisor: string;
 }
 
-const getJazoData = (t: TFunction, isRu: boolean): JazoItem[] => [
+const getJazoData = (t: TFunction): JazoItem[] => [
   {
     id: "ati",
-    code: isRu ? "ИТР —" : "ATI —",
+    code: t("jazoTurlari.codes.ati", "ATI —"),
     name: t("jazoTurlari.ati", "AXLOQ TUZATISH ISHLARI"),
-    fullTitle: isRu ? "ИТР — ИСПРАВИТЕЛЬНЫЕ РАБОТЫ" : "ATI — AXLOQ TUZATISH ISHLARI",
+    fullTitle: t("jazoDetail.ati.title", "ATI — AXLOQ TUZATISH ISHLARI"),
     description: t(
       "jazoDetail.ati.desc",
       "Axloq tuzatish ishlari — bu jazo turi bo'lib, u jinoyat sodir etgan shaxslarni jamiyatda axloqiy me'yorlarga rioya qilishga o'rgatish, ularning ijtimoiy moslashuvini ta'minlash maqsadida qo'llaniladi."
@@ -46,9 +46,9 @@ const getJazoData = (t: TFunction, isRu: boolean): JazoItem[] => [
   },
   {
     id: "och",
-    code: isRu ? "ОС —" : "OCH —",
+    code: t("jazoTurlari.codes.och", "OCH —"),
     name: t("jazoTurlari.och", "OZODLIKNI CHEKLASH"),
-    fullTitle: isRu ? "ОС — ОГРАНИЧЕНИЕ СВОБОДЫ" : "OCH — OZODLIKNI CHEKLASH",
+    fullTitle: t("jazoDetail.och.title", "OCH — OZODLIKNI CHEKLASH"),
     description: t(
       "jazoDetail.och.desc",
       "Ozodlikni cheklash — sud tomonidan mahkumga nisbatan muayyan cheklovlar belgilashdan iborat bo'lib, mahkum yashash joyini tark etmasligi va belgilangan taqiqlarga amal qilishi shart."
@@ -59,9 +59,9 @@ const getJazoData = (t: TFunction, isRu: boolean): JazoItem[] => [
   },
   {
     id: "mji",
-    code: isRu ? "ООР —" : "MJI —",
+    code: t("jazoTurlari.codes.mji", "MJI —"),
     name: t("jazoTurlari.mji", "MAJBURIY JAMOAT ISHLARI"),
-    fullTitle: isRu ? "ООР — ОБЯЗАТЕЛЬНЫЕ ОБЩЕСТВЕННЫЕ РАБОТЫ" : "MJI — MAJBURIY JAMOAT ISHLARI",
+    fullTitle: t("jazoDetail.mji.title", "MJI — MAJBURIY JAMOAT ISHLARI"),
     description: t(
       "jazoDetail.mji.desc",
       "Majburiy jamoat ishlari — mahkumni ishdan yoki o'qishdan bo'sh vaqtida haq to'lanmaydigan foydali jamoat ishlarini bajarishga majburiy jalb qilishdan iboratdir."
@@ -72,9 +72,9 @@ const getJazoData = (t: TFunction, isRu: boolean): JazoItem[] => [
   },
   {
     id: "mxmq",
-    code: isRu ? "ЛОП —" : "MXMQ —",
+    code: t("jazoTurlari.codes.mxmq", "MXMQ —"),
     name: t("jazoTurlari.mxmq", "MUAYYAN HUQUQDAN MAHRUM QILISH"),
-    fullTitle: isRu ? "ЛОП — ЛИШЕНИЕ ОПРЕДЕЛЕННОГО ПРАВА" : "MXMQ — MUAYYAN HUQUQDAN MAHRUM QILISH",
+    fullTitle: t("jazoDetail.mxmq.title", "MXMQ — MUAYYAN HUQUQDAN MAHRUM QILISH"),
     description: t(
       "jazoDetail.mxmq.desc",
       "Muayyan huquqdan mahrum qilish — aybdor shaxsning ma'lum tashkilotlarda rahbarlik yoki mansabdor lavozimlarni egallashini yoki kasbiy faoliyat bilan shug'ullanishini cheklashdir."
@@ -85,9 +85,9 @@ const getJazoData = (t: TFunction, isRu: boolean): JazoItem[] => [
   },
   {
     id: "shs",
-    code: isRu ? "УО —" : "SHS —",
+    code: t("jazoTurlari.codes.shs", "SHS —"),
     name: t("jazoTurlari.shs", "SHARTLI HUKM QILISH"),
-    fullTitle: isRu ? "УО — УСЛОВНОЕ ОСУЖДЕНИЕ" : "SHS — SHARTLI HUKM QILISH",
+    fullTitle: t("jazoDetail.shs.title", "SHS — SHARTLI HUKM QILISH"),
     description: t(
       "jazoDetail.shs.desc",
       "Shartli hukm qilish — agar sud jazoni o'tamasdan turib ham mahkumni tuzatish mumkin degan xulosaga kelsa, belgilangan sinov muddati davomida uning xulq-atvori nazorat qilinadi."
@@ -98,9 +98,9 @@ const getJazoData = (t: TFunction, isRu: boolean): JazoItem[] => [
   },
   {
     id: "udo",
-    code: isRu ? "УДО —" : "UDO —",
+    code: t("jazoTurlari.codes.udo", "UDO —"),
     name: t("jazoTurlari.udo", "UZOQ MUDDATLI OZOD QILISH"),
-    fullTitle: isRu ? "УДО — УСЛОВНО-ДОСРОЧНОЕ ОСВОБОЖДЕНИЕ" : "UDO — JAZODAN MUDDATIDAN ILGARI SHARTLI OZOD QILISH",
+    fullTitle: t("jazoDetail.udo.title", "UDO — UZOQ MUDDATLI OZOD QILISH"),
     description: t(
       "jazoDetail.udo.desc",
       "Jazodan muddatidan ilgari shartli ozod qilish — jazoni o'tayotgan shaxs qonunda belgilangan me'yorlarni bajargan va namunali xulq ko'rsatgan taqdirda sud qarori bilan qo'llaniladi."
@@ -169,12 +169,11 @@ BookPage.displayName = "BookPage";
 
 const JazoDetail = () => {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const flipBookRef = useRef<PageFlipInstance>(null);
 
-  const isRu = (i18n.language || "uz").toLowerCase().startsWith("ru");
-  const jazoData = getJazoData(t, isRu);
+  const jazoData = getJazoData(t);
 
   const initialId = searchParams.get("id") || "ati";
   const initialIdx = Math.max(
@@ -391,7 +390,7 @@ const JazoDetail = () => {
                 <div className={styles.infoHighlightCard}>
                   <div className={styles.highlightHeading}>
                     <FileText size={16} />
-                    <span>{isRu ? "Основные сведения" : "Asosiy ma'lumotlar"}</span>
+                    <span>{t("jazoDetail.mainInfo", "Asosiy ma'lumotlar")}</span>
                   </div>
                   <ul className={styles.highlightList}>
                     <li>
@@ -400,7 +399,7 @@ const JazoDetail = () => {
                         className={styles.checkIcon}
                         strokeWidth={3}
                       />
-                      <span>{isRu ? "Срок: " : "Muddati: "}{item.duration}</span>
+                      <span>{t("jazoDetail.durationPrefix", "Muddati: ")}{item.duration}</span>
                     </li>
                     <li>
                       <Check
@@ -408,7 +407,7 @@ const JazoDetail = () => {
                         className={styles.checkIcon}
                         strokeWidth={3}
                       />
-                      <span>{isRu ? "Место: " : "Joyi: "}{item.location}</span>
+                      <span>{t("jazoDetail.locationPrefix", "Joyi: ")}{item.location}</span>
                     </li>
                     <li>
                       <Check
@@ -416,7 +415,7 @@ const JazoDetail = () => {
                         className={styles.checkIcon}
                         strokeWidth={3}
                       />
-                      <span>{isRu ? "Надзор: " : "Nazorat: "}{item.supervisor}</span>
+                      <span>{t("jazoDetail.supervisorPrefix", "Nazorat: ")}{item.supervisor}</span>
                     </li>
                   </ul>
                 </div>
